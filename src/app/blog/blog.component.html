@@ -1,0 +1,7 @@
+<!-- <app-header></app-header> -->
+
+<div class="panel panel-default" *ngFor="let story of stories" (click)="goToStory(story._id)">
+    <div class="panel-body story-panel">
+        {{ story.title }}
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<h3>Dashboard</h3>
+
+<!-- show stories -->
+<table class="table table-hover">
+  <caption>Stories</caption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>
+        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+         Updated
+      </th>
+      <th>Title</th>
+      <th>Posts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="story" *ngFor="let story of stories; let i = index" (click)="openStoryDetails(story._id)">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ story.updatedAt | date: "dd.MM.yyyy hh:mm" }}</td>
+      <td>{{ story.title }}</td>
+      <td>{{ story.posts.length }}</td>
+      <!-- <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteStory(story._id); ">delete</button>
+      </td> -->
+    </tr>
+  </tbody>
+</table>
+
+<!-- create new story -->
+<a [routerLink]="['/admin/new-story']">New story</a>
+
+<!-- show users -->
+<table class="table table-hover">
+  <caption>Users</caption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Username</th>
+      <th><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Likes</th>
+      <th><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comments</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users; let i = index" class="story">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ user.username }}</td>
+      <td>{{ user.likes }}</td>
+      <td>{{ user.comments }}</td>
+      <td>
+        <span class="label" [class.label-danger]="user.role === 'admin'" [class.label-primary]="user.role === 'family'" [class.label-default]="user.role === 'friend'">
+          {{ user.role }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- create new user -->
+<a [routerLink]="['/admin/new-user']">New user</a>
