@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-var db = process.env.MONGOLAB_URI || 'mongodb://localhost/blogdb';
+var db = process.env.MONGOLAB_URI || 'mongodb://localhost/awesomedb';
 
 mongoose.connect(db, function(err) {
     if (err) {
