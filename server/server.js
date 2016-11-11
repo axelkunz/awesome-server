@@ -2,7 +2,7 @@
 
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 61000;
+var port = process.env.PORT || 3000;
 var logger = require('morgan');
 var session = require('express-session');
 var bodyParser = require('body-parser');
