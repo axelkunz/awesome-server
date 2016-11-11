@@ -3,8 +3,6 @@
 var mongoose = require('mongoose');
 
 var db = process.env.MONGO_URI || 'mongodb://localhost/blogdb';
-console.log(process.env.MONGO_URI);
-console.log(process.env.PORT);
 
 mongoose.connect(db, function(err) {
     if (err) {

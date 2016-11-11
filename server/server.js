@@ -20,7 +20,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(express.static(__dirname + './dist'));  // development
+app.use(express.static(__dirname + '/../dist'));  // development
+
+console.log(__dirname + './dist');
+console.log(__dirname + './../dist');
 
 app.use(bodyParser.json());
 
