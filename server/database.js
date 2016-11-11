@@ -2,8 +2,8 @@
 
 var mongoose = require('mongoose');
 
-var db = process.env.MONGOLAB_URI || 'mongodb://localhost/awesomedb';
-
+var db = process.env.MONGO_URI || 'mongodb://localhost/blogdb';
+console.log(process.env.MONGO_URI);
 mongoose.connect(db, function(err) {
     if (err) {
         console.log("couldn't connect to mongodb!");
