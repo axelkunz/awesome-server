@@ -34,6 +34,11 @@ export class DashboardComponent implements OnInit {
         // $location.path("/dashboard/stories/" + id);
     }
 
+    openUserDetails(id) {
+        console.log("open user details");
+        // $location.path("/dashboard/stories/" + id);
+    }
+
     deleteStory(id: string) {
         this.storyService.delete(id);
     }

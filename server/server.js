@@ -1,5 +1,6 @@
 "use strict";
 
+var path = require('path');
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
@@ -20,10 +21,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(express.static(__dirname + '/../dist'));  // development
-
-console.log(__dirname + './dist');
-console.log(__dirname + './../dist');
+app.use(express.static(path.join(__dirname, '../', 'dist')));  // development
 
 app.use(bodyParser.json());
 

@@ -15,7 +15,7 @@ export class BlogComponent implements OnInit {
 
     constructor(
         private storyService: StoryService,
-        private router: Router
+        private router: Router//
     ) {
         // this.router = Router;
     }

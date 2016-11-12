@@ -2,15 +2,15 @@ import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import { Story } from "./story";
+import { ConfigService } from "./shared/config.service";
 
 @Injectable()
 export class StoryService {
-    HOST = "http://localhost:3000";
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private configService: ConfigService) { }
 
     query(): Promise<Story[]> {
-        return this.http.get(this.HOST + "/api/stories")
+        return this.http.get(this.configService.HOST + "/api/stories")
                    .toPromise()
                    .then(function(res) {
                        return res.json() as Story[];
@@ -21,7 +21,7 @@ export class StoryService {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.HOST + "/api/stories", story, options)
+        return this.http.post(this.configService.HOST + "/api/stories", story, options)
                    .toPromise()
                    .then(function(res) {
                        return res.json() as Story;
@@ -29,7 +29,7 @@ export class StoryService {
     }
 
     delete(id: string): Promise<any> {
-        return this.http.delete(this.HOST + "/api/stories/" + id)
+        return this.http.delete(this.configService.HOST + "/api/stories/" + id)
                    .toPromise()
                    .then(function(res) {
                        return res.json();

@@ -13,6 +13,7 @@ import { StoryDetailComponent } from "./admin/story-detail/story-detail.componen
 import { StoryComponent } from "./blog/story/story.component";
 import { MapComponent } from "./blog/story/map/map.component";
 
+import { ConfigService } from "./shared/config.service";
 import { UserService } from "./user.service";
 import { StoryService } from "./story.service";
 import { LayerService } from "./blog/story/map/layer.service";
@@ -46,7 +47,7 @@ import { LayerService } from "./blog/story/map/layer.service";
       { path: "admin/stories/:id", component: StoryDetailComponent }
     ])
   ],
-  providers: [UserService, StoryService, LayerService],
+  providers: [ConfigService, UserService, StoryService, LayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

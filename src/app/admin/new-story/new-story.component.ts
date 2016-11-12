@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
-
+import { Router } from "@angular/router";
 import { Story } from "../../story";
 import { StoryService } from "../../story.service";
 
@@ -14,7 +14,8 @@ export class NewStoryComponent implements OnInit {
 
     constructor(
         private storyService: StoryService,
-        private location: Location
+        private location: Location,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -23,9 +24,7 @@ export class NewStoryComponent implements OnInit {
 
     create() {
         this.storyService.create(this.story).then(res => {
-            console.log(this.location.path());
-            //this.location.path("/admin/dashboard");
-            //this.router.navigateByUrl('/admin/dashboard');
+            this.router.navigateByUrl("/admin/dashboard");
         });
     }
 

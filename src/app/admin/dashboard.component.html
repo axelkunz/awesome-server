@@ -43,7 +43,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users; let i = index" class="story">
+    <tr *ngFor="let user of users; let i = index" class="story" (click)="openUserDetails(user._id)">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ user.username }}</td>
       <td>{{ user.likes }}</td>
