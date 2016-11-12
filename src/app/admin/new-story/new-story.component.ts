@@ -19,7 +19,7 @@ export class NewStoryComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.story = new Story("", []);
+        this.story = new Story();
     }
 
     create() {

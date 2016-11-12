@@ -17,6 +17,9 @@ import { ConfigService } from "./shared/config.service";
 import { UserService } from "./user.service";
 import { StoryService } from "./story.service";
 import { LayerService } from "./blog/story/map/layer.service";
+import { PostService } from "./shared/post.service";
+import { NewPostComponent } from './admin/new-post/new-post.component';
+import { EditPostComponent } from './admin/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { LayerService } from "./blog/story/map/layer.service";
     NewUserComponent,
     StoryDetailComponent,
     StoryComponent,
-    MapComponent
+    MapComponent,
+    NewPostComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
@@ -44,10 +49,12 @@ import { LayerService } from "./blog/story/map/layer.service";
       { path: "admin/dashboard", component: DashboardComponent },
       { path: "admin/new-story", component: NewStoryComponent },
       { path: "admin/new-user", component: NewUserComponent },
-      { path: "admin/stories/:id", component: StoryDetailComponent }
+      { path: "admin/stories/:id", component: StoryDetailComponent },
+      { path: "admin/stories/:id/new-post", component: NewPostComponent },
+      { path: "admin/stories/:id/posts/:pID", component: EditPostComponent }
     ])
   ],
-  providers: [ConfigService, UserService, StoryService, LayerService],
+  providers: [ConfigService, UserService, StoryService, LayerService, PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

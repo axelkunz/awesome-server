@@ -75,9 +75,26 @@ router.post('/stories', function (req, res) {
     });
 });
 
+router.put('/stories/:id', function (req, res) {
+    var id = req.params.id;
+    var story = req.body;
+
+    var update = {
+         title: story.title,
+         posts: story.posts
+    };
+    Story.findOneAndUpdate({_id: id}, update, function(err, story) {
+        if (err) {
+            throw err;
+        }
+        res.json(story);
+    });
+
+});
+
 router.delete('/stories/:id', function (req, res) {
     var id = req.params.id;
-    Story.remove(id, function(err, story) {
+    Story.findOneAndRemove({ id: id }, function(err, story) {
         if (err) {
             throw err;
         }
@@ -114,9 +131,25 @@ router.post('/posts', function (req, res) {
     });
 });
 
+router.put('/posts/:id', function (req, res) {
+    var id = req.params.id;
+    var post = req.body;
+    var update = {
+         title: post.title,
+         text: post.text,
+         published: post.published
+    };
+    Post.findOneAndUpdate({_id: id}, update, function(err, post) {
+        if (err) {
+            throw err;
+        }
+        res.json(post);
+    });
+});
+
 router.delete('/posts/:id', function (req, res) {
     var id = req.params.id;
-    Post.remove(id, function(err, post) {
+    Post.findOneAndRemove({ id: id }, function(err, post) {
         if (err) {
             throw err;
         }
@@ -155,7 +188,7 @@ router.post('/users', function (req, res) {
 
 router.delete('/users/:id', function (req, res) {
     var id = req.params.id;
-    User.remove(id, function(err, user) {
+    User.findOneAndRemove({ id: id }, function(err, user) {
         if (err) {
             throw err;
         }

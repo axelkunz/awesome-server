@@ -1,9 +1,9 @@
 export class Story {
 
-    constructor(
-        public title: string,
-        public posts: any[]
-    ) {}
+    _id: string;
+    title: string;
+
+    constructor() {}
     //_id: string;
     //title: string;
     //posts: any[];

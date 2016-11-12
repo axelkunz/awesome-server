@@ -11,7 +11,6 @@
          Updated
       </th>
       <th>Title</th>
-      <th>Posts</th>
     </tr>
   </thead>
   <tbody>
@@ -19,7 +18,8 @@
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ story.updatedAt | date: "dd.MM.yyyy hh:mm" }}</td>
       <td>{{ story.title }}</td>
-      <td>{{ story.posts.length }}</td>
+      <!--<td>{{ getPosts(story._id) | async }}</td>-->
+      <!--<td>{{ story.posts.length }}</td>-->
       <!-- <td>
         <button class="btn btn-danger btn-sm" (click)="deleteStory(story._id); ">delete</button>
       </td> -->

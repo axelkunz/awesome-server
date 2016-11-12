@@ -17,11 +17,30 @@ export class StoryService {
                    });
     }
 
+    get(id): Promise<Story> {
+        return this.http.get(this.configService.HOST + "/api/stories/" + id)
+                   .toPromise()
+                   .then(function(res) {
+                       return res.json() as Story;
+                   });
+    }
+
     create(story: Story): Promise<Story> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.configService.HOST + "/api/stories", story, options)
+                   .toPromise()
+                   .then(function(res) {
+                       return res.json() as Story;
+                   });
+    }
+
+    update(story: Story): Promise<Story> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(this.configService.HOST + "/api/stories/" + story._id, story, options)
                    .toPromise()
                    .then(function(res) {
                        return res.json() as Story;

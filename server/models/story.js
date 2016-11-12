@@ -4,8 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var storySchema = new Schema({
-    title: String,
-    posts: Array
+    title: String
 },{
     timestamps: true  // creates updatedAt and createdAt
 });
