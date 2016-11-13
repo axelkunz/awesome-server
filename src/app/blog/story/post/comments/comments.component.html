@@ -1,0 +1,15 @@
+<h4 id="chapter-comments">Kommentare</h4>
+<div *ngFor="let comment of comments">
+  {{ comment.text }}
+  <p>
+    <span class="comment-user">{{ comment.userID }}</span> 
+    <!--<span class="comment-timespan">Gestern 17:59</span>-->
+    <span class="comment-timespan">{{ comment.createdAt | date: "dd.MM.yyyy hh:mm" }}</span>
+    <!--<span class="comment-timespan" *ngIf="isToday(comment.createdAt)">heute {{ comment.createdAt | date: "hh:mm" }}</span>-->
+  </p>
+</div>
+
+<!-- new comment -->
+<textarea class="form-control" rows="3" cols="40" placeholder="Kommentar schreiben..." [(ngModel)]="newComment.text"></textarea>
+
+<button type="button" class="btn btn-default" [disabled]="!newComment.text || lock" (click)="create()">Send</button>

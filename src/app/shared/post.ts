@@ -4,4 +4,6 @@ export class Post {
     text: string;
     published: boolean = false;
     storyID: string;
+    comments: any[];
+    likes: string[];
 }

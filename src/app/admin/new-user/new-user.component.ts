@@ -21,7 +21,7 @@ export class NewUserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.roles = this.configService.ROLES; 
+    this.roles = this.configService.ROLES;
     this.newUser = new User();
   }
 

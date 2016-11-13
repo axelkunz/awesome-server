@@ -57,6 +57,7 @@ router.get('/stories', function (req, res) {
 
 router.get('/stories/:id', function (req, res) {
     var id = req.params.id;
+    console.log(id);
     Story.findOne({ _id: id }, function(err, story) {
         if (err) {
             throw err;
@@ -137,6 +138,7 @@ router.put('/posts/:id', function (req, res) {
     var update = {
          title: post.title,
          text: post.text,
+         comments: post.comments,
          published: post.published
     };
     Post.findOneAndUpdate({_id: id}, update, function(err, post) {

@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Londrina+Shadow|Open+Sans');
+
+.story-panel {
+    font-family: 'Londrina Shadow', sans-serif;
+    font-size: 60px;
+    text-transform: uppercase;
+    height: 125px;
+    cursor: pointer;
+}
+

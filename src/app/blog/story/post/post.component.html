@@ -1,0 +1,11 @@
+<!--<app-post data="$ctrl.post"></app-post>-->
+<h3>
+  {{ post.title }}
+  <!--<app-like-button data="$ctrl.data.likes"></app-like-button>-->
+</h3>
+
+<p>{{ post.text }}</p>
+
+<!--<app-likes data="$ctrl.data.likes"></app-likes>-->
+<app-comments [comments]="post.comments" (onNewComment)="addComment($event)"></app-comments>
+

@@ -1,0 +1,10 @@
+.comment-user {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.comment-timespan {
+  font-size: 12px;
+  font-weight: normal;
+  color: grey;
+}

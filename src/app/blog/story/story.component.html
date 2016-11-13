@@ -1,14 +1,15 @@
 <!--<app-header></app-header>-->
 
+<h2><span *ngIf="story">{{ story.title }}</span></h2>
+
 <div class="row">
 
   <div [class.col-xs-12]="!showPost" [class.col-xs-6]="showPost" (click)="onMapClick()">
     <app-map></app-map>
   </div>
 
-  <div [class.col-xs-6]="showPost">
-    <!--<app-post data="$ctrl.post"></app-post>-->
-    post
+  <div [class.col-xs-6]="showPost" *ngIf="post">
+    <app-post [post]="post"></app-post>
   </div>
 
 </div>

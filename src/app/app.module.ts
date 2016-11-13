@@ -12,14 +12,18 @@ import { NewUserComponent } from "./admin/new-user/new-user.component";
 import { StoryDetailComponent } from "./admin/story-detail/story-detail.component";
 import { StoryComponent } from "./blog/story/story.component";
 import { MapComponent } from "./blog/story/map/map.component";
+import { NewPostComponent } from './admin/new-post/new-post.component';
+import { EditPostComponent } from './admin/edit-post/edit-post.component';
+import { PostComponent } from './blog/story/post/post.component';
+import { CommentsComponent } from './blog/story/post/comments/comments.component';
 
 import { ConfigService } from "./shared/config.service";
 import { UserService } from "./user.service";
 import { StoryService } from "./story.service";
 import { LayerService } from "./blog/story/map/layer.service";
 import { PostService } from "./shared/post.service";
-import { NewPostComponent } from './admin/new-post/new-post.component';
-import { EditPostComponent } from './admin/edit-post/edit-post.component';
+import { AuthService } from "./shared/auth.service";
+import { CommentDatePipe } from './blog/story/post/comments/comment-date.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,10 @@ import { EditPostComponent } from './admin/edit-post/edit-post.component';
     StoryComponent,
     MapComponent,
     NewPostComponent,
-    EditPostComponent
+    EditPostComponent,
+    PostComponent,
+    CommentsComponent,
+    CommentDatePipe
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,7 @@ import { EditPostComponent } from './admin/edit-post/edit-post.component';
       { path: "admin/stories/:id/posts/:pID", component: EditPostComponent }
     ])
   ],
-  providers: [ConfigService, UserService, StoryService, LayerService, PostService],
+  providers: [AuthService, ConfigService, UserService, StoryService, LayerService, PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
