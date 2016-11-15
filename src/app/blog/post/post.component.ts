@@ -1,8 +1,8 @@
 import { Component, OnInit,  Input } from "@angular/core";
 
-import { Post } from "../../../shared/post";
+import { Post } from "../../shared/post";
 import { Comment } from "./comments/comment";
-import { PostService } from "../../../shared/post.service";
+import { PostService } from "../../shared/post.service";
 
 @Component({
   selector: "app-post",
@@ -15,6 +15,7 @@ export class PostComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit() {
+    console.log("init post");
   }
 
   addComment(comment: Comment) {

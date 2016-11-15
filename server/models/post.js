@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
-    storyID: Schema.Types.ObjectId,
     title: String,
     text: String,
     published: { type: Boolean, default: false },

@@ -2,7 +2,6 @@
 
 var express = require('express');
 var router = express.Router();
-var Story = require('./models/story');
 var Post = require('./models/post');
 var GeoJson = require('./models/feature');
 var User = require('./models/user');
@@ -43,63 +42,6 @@ router.delete('/features/:id', function (req, res) {
             throw err;
         }
         res.json(feature);
-    });
-});
-
-router.get('/stories', function (req, res) {
-    Story.find({}, function(err, stories) {
-        if (err) {
-            throw err;
-        }
-        res.json(stories);
-    });
-});
-
-router.get('/stories/:id', function (req, res) {
-    var id = req.params.id;
-    console.log(id);
-    Story.findOne({ _id: id }, function(err, story) {
-        if (err) {
-            throw err;
-        }
-        res.json(story);
-    });
-});
-
-router.post('/stories', function (req, res) {
-    var story = req.body;
-    Story.create(story, function(err, story) {
-        if (err) {
-            throw err;
-        }
-        res.json(story);
-    });
-});
-
-router.put('/stories/:id', function (req, res) {
-    var id = req.params.id;
-    var story = req.body;
-
-    var update = {
-         title: story.title,
-         posts: story.posts
-    };
-    Story.findOneAndUpdate({_id: id}, update, function(err, story) {
-        if (err) {
-            throw err;
-        }
-        res.json(story);
-    });
-
-});
-
-router.delete('/stories/:id', function (req, res) {
-    var id = req.params.id;
-    Story.findOneAndRemove({ id: id }, function(err, story) {
-        if (err) {
-            throw err;
-        }
-        res.json(story);
     });
 });
 

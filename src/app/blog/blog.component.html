@@ -1,9 +1,24 @@
+
 <h1>Everything is awesome!</h1>
 
-<div class="panel panel-default" *ngFor="let story of stories" (click)="goToStory(story._id)">
-    <div class="panel-body story-panel">
-        {{ story.title }}
-    </div>
-</div>
+<div class="row">
 
-<a href="/admin/dashboard" class="btn btn-primary btn-sm">Dashboard</a>
+  <!-- map -->
+  <div class="col-md-6">
+    <div id="map"></div>
+  </div>
+
+  <!-- post overview -->
+  <div class="col-md-6" *ngIf="!selectedPost">
+    <div class="post-panel" *ngFor="let post of posts" (click)="loadPost(post)">
+      {{ post.title }}
+    </div>
+  </div>
+
+  <!-- post -->
+  <div class="col-md-6" *ngIf="selectedPost">
+    <button (click)="showOverview()">back</button>
+    <app-post [post]="selectedPost"></app-post>
+  </div>
+
+</div>
