@@ -17,5 +17,37 @@
     </label>
   </div>
 
+  <!-- show features -->
+  <table class="table table-hover" *ngIf="features">
+    <caption>Features</caption>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feature of features; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          <i class="fa" [class.fa-circle]="feature.geometry.type === 'Point'" aria-hidden="true"></i>
+        </td>
+
+        <!-- category -->
+        <td>
+          <i class="fa" [class.fa-bed]="feature.properties.category === 'accomodation'" [class.fa-cutlery]="feature.properties.category === 'food'" [class.fa-globe]="feature.properties.category === 'post'" [class.fa-info]="feature.properties.category === 'attraction'"
+           aria-hidden="true"></i>
+        </td>
+
+        <td>{{ feature.properties.name }}</td>
+        <td><button class="btn btn-link" (click)="deleteFeature(feature._id)">delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-default btn-sm" (click)="onNewFeatureClick()">new feature</button>
+
   <button class="btn btn-default" (click)="save()">save</button>
 </form>

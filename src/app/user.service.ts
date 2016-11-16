@@ -19,6 +19,14 @@ export class UserService {
                    });
     }
 
+    getByUsername(username: string): Promise<User> {
+        return this.http.get(this.configService.HOST + this.PATH)
+                   .toPromise()
+                   .then(function(res) {
+                       return res.json().filter(o => o.username === username);
+                   });
+    }
+
     create(user: User): Promise<User> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });

@@ -10,8 +10,9 @@
 
   <!-- post overview -->
   <div id="overview" class="col-md-6" *ngIf="!selectedPost">
-    <div class="post-panel" *ngFor="let post of posts" (click)="showPost(post)">
+    <div class="post-panel" *ngFor="let post of posts" (click)="showPost(post)" [class.selected]="hoveredPostID === post._id">
       {{ post.title }}
+      <!-- <span class="badge">neu</span> -->
     </div>
   </div>
 

@@ -17,6 +17,7 @@ export class BlogComponent implements OnInit {
     selectedPost: Post;
     overviewLayer: any;
     postLayer: any;
+    hoveredPostID: string;
 
     constructor(
         private postService: PostService,
@@ -55,7 +56,7 @@ export class BlogComponent implements OnInit {
     }
 
     initMap() {
-        this.map = L.map("map").setView([0, 0], 2);
+        this.map = L.map("map").setView([0, 0], 5);
 
         // add basemap
         this.layerService.basemaps.lightOSM.addTo(this.map);
@@ -73,7 +74,24 @@ export class BlogComponent implements OnInit {
             this.layerService.getOverview().then(layer => {
                 this.overviewLayer = layer;
                 this.overviewLayer.addTo(this.map);
-                this.fitToLayer(this.overviewLayer);
+                // this.fitToLayer(this.overviewLayer);
+
+                // highlight post in overview when it's icon is hovered
+                this.overviewLayer.on("mouseover", e => {
+                    this.hoveredPostID = e.layer.feature.properties.postID;
+                });
+
+                this.overviewLayer.on("mouseout", e => {
+                    this.hoveredPostID = null;
+                });
+
+                // show post when it's icon is clicked
+                this.overviewLayer.on("click", e => {
+                    let clickedPost = this.posts.find(o => {
+                        return o._id === e.layer.feature.properties.postID;
+                    });
+                    this.showPost(clickedPost);
+                });
             });
         }
     }
@@ -83,6 +101,7 @@ export class BlogComponent implements OnInit {
             this.postLayer = layer;
             this.postLayer.addTo(this.map);
             this.flyToLayer(this.postLayer);
+
 
             // add globe
             // let miniMap = new L.Control.GlobeMiniMap({
@@ -96,13 +115,13 @@ export class BlogComponent implements OnInit {
 
     fitToLayer(layer) {
         this.map.fitBounds(layer.getBounds(), {
-            padding: [40, 40]
+            // padding: [40, 40]
         });
     }
 
     flyToLayer(layer) {
         this.map.flyToBounds(layer.getBounds(), {
-            padding: [40, 40]
+            // padding: [40, 40]
         }, {
             duration: 4
         });

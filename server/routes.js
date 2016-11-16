@@ -37,7 +37,7 @@ router.post('/features', function (req, res) {
 
 router.delete('/features/:id', function (req, res) {
     var id = req.params.id;
-    GeoJson.remove(id, function(err, feature) {
+    GeoJson.findOneAndRemove({ _id: id }, function(err, feature) {
         if (err) {
             throw err;
         }

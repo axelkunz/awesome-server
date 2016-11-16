@@ -8,20 +8,20 @@ import { ConfigService } from "./config.service";
 @Injectable()
 export class PostService {
 
-  PATH: string = "/api/posts/";
+    PATH: string = "/api/posts/";
 
-  constructor(
-    private http: Http,
-    private configService: ConfigService
-  ) { }
+    constructor(
+        private http: Http,
+        private configService: ConfigService
+    ) { }
 
-  query(): Promise<Post[]> {
-    return this.http.get(this.configService.HOST + this.PATH)
+    query(): Promise<Post[]> {
+        return this.http.get(this.configService.HOST + this.PATH)
                 .toPromise()
                 .then(function(res) {
                     return res.json() as Post[];
                 });
-  }
+    }
 
     get(id): Promise<Post> {
         return this.http.get(this.configService.HOST + this.PATH + id)

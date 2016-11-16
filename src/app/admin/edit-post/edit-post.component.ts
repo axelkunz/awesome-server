@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { Post } from "../../shared/post";
 import { PostService } from "../../shared/post.service";
+import { Feature } from "../../shared/feature";
+import { FeatureService } from "../../shared/feature.service";
 
 @Component({
     selector: "app-edit-post",
@@ -12,16 +14,21 @@ import { PostService } from "../../shared/post.service";
 export class EditPostComponent implements OnInit, OnDestroy {
     sub: any;
     post: Post;
+    postID: string;
+    features: Feature[];
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private postService: PostService
+        private postService: PostService,
+        private featureService: FeatureService
     ) { }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.postService.get(params["id"]).then(post => this.post = post);
+            this.postID = params["id"];
+            this.postService.get(this.postID).then(post => this.post = post);
+            this.featureService.getByPostID(this.postID).then(features => this.features = features);
         });
     }
 
@@ -30,9 +37,20 @@ export class EditPostComponent implements OnInit, OnDestroy {
     }
 
     save() {
-        console.log("save");
         this.postService.update(this.post).then(res => {
             this.router.navigateByUrl("/admin/dashboard");
+        });
+    }
+
+    onNewFeatureClick() {
+        console.log(`/admin/posts/${ this.postID }/new-feature`);
+        this.router.navigateByUrl(`/admin/posts/${ this.postID }/new-feature`);
+    }
+
+    deleteFeature(id: string) {
+        this.featureService.delete(id).then(res => {
+            let index = this.features.findIndex(o => o._id === id);
+            this.features = this.features.splice(0, index);
         });
     }
 }

@@ -16,9 +16,14 @@ import { CommentsComponent } from "./blog/post/comments/comments.component";
 import { ConfigService } from "./shared/config.service";
 import { UserService } from "./user.service";
 import { LayerService } from "./blog/layer.service";
+import { IconService } from "./blog/icon.service";
 import { PostService } from "./shared/post.service";
 import { AuthService } from "./shared/auth.service";
+import { FeatureService } from "./shared/feature.service";
+import { GuardService } from "./shared/guard.service";
 import { CommentDatePipe } from "./blog/post/comments/comment-date.pipe";
+import { LoginComponent } from './login/login.component';
+import { NewFeatureComponent } from './admin/edit-post/new-feature/new-feature.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,9 @@ import { CommentDatePipe } from "./blog/post/comments/comment-date.pipe";
     EditPostComponent,
     PostComponent,
     CommentsComponent,
-    CommentDatePipe
+    CommentDatePipe,
+    LoginComponent,
+    NewFeatureComponent
   ],
   imports: [
     BrowserModule,
@@ -38,18 +45,29 @@ import { CommentDatePipe } from "./blog/post/comments/comment-date.pipe";
     HttpModule,
     RouterModule.forRoot([
       // blog routes
-      { path: "", component: BlogComponent },
+      { path: "", component: LoginComponent, useAsDefault: true },
+      { path: "blog", component: BlogComponent, canActivate: [GuardService] },
 
       // admin routes
       // { path: "", redirectTo: "admin/dashboard", pathMatch: "full" },
       { path: "admin", redirectTo: "admin/dashboard", pathMatch: "full" },
-      { path: "admin/dashboard", component: DashboardComponent },
-      { path: "admin/new-user", component: NewUserComponent },
-      { path: "admin/new-post", component: NewPostComponent },
-      { path: "admin/posts/:id", component: EditPostComponent }
+      { path: "admin/dashboard", component: DashboardComponent, canActivate: [GuardService] },
+      { path: "admin/new-user", component: NewUserComponent, canActivate: [GuardService] },
+      { path: "admin/new-post", component: NewPostComponent, canActivate: [GuardService] },
+      { path: "admin/posts/:id", component: EditPostComponent, canActivate: [GuardService] },
+      { path: "admin/posts/:id/new-feature", component: NewFeatureComponent, canActivate: [GuardService] }
     ])
   ],
-  providers: [AuthService, ConfigService, UserService, LayerService, PostService],
+  providers: [
+      AuthService,
+      ConfigService,
+      UserService,
+      LayerService,
+      IconService,
+      PostService,
+      FeatureService,
+      GuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

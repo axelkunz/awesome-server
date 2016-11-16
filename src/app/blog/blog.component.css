@@ -26,3 +26,7 @@ h2 {
   margin-bottom: 5px;
   font-size: 18px;
 }
+
+.selected {
+  background-color: DarkTurquoise;
+}

@@ -11,11 +11,11 @@ export class IconService {
   //   markerColor: "red"
   // });
 
-  // hotelIcon = L.AwesomeMarkers.icon({
-  //   icon: "hotel",
-  //   prefix: "fa",
-  //   markerColor: "blue"
-  // });
+    // hotelIcon = L.AwesomeMarkers.icon({
+    //     icon: "hotel",
+    //     prefix: "fa",
+    //     markerColor: "blue"
+    // });
 
   // eatIcon = L.AwesomeMarkers.icon({
   //   icon: "cutlery",
