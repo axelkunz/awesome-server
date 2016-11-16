@@ -15,6 +15,8 @@ export class BlogComponent implements OnInit {
     posts: Post[];
     map: any;
     selectedPost: Post;
+    overviewLayer: any;
+    postLayer: any;
 
     constructor(
         private postService: PostService,
@@ -32,25 +34,62 @@ export class BlogComponent implements OnInit {
         this.initMap();
     }
 
-    loadPost(post: Post) {
+    showPost(post: Post) {
         this.selectedPost = post;
+
+        // remove overview layer
+        this.map.removeLayer(this.overviewLayer);
+
+        // load post features on map
+        this.addPostLayer(this.selectedPost._id);
     }
 
     showOverview() {
         this.selectedPost = null;
+
+        // remove post features
+        this.map.removeLayer(this.postLayer);
+
+        // add overview features
+        this.addOverviewLayer();
     }
 
     initMap() {
-        // L.Icon.Default.imagePath = 'path-to-your-leaflet-images-folder';
-        this.map = L.map("map").setView([47.505, 13.00], 2);
+        this.map = L.map("map").setView([0, 0], 2);
 
         // add basemap
-        this.layerService.basemaps.light.addTo(this.map);
+        this.layerService.basemaps.lightOSM.addTo(this.map);
 
-        // ad overview layer
-        this.layerService.getOverview().then(layer => {
-            layer.addTo(this.map);
-            this.fitToLayer(layer);
+        // add overview features
+        this.addOverviewLayer();
+    }
+
+    addOverviewLayer() {
+        if (this.overviewLayer) {  // only load once
+            this.overviewLayer.addTo(this.map);
+            this.fitToLayer(this.overviewLayer);
+        } else {
+            this.layerService.getOverview().then(layer => {
+                this.overviewLayer = layer;
+                this.overviewLayer.addTo(this.map);
+                this.fitToLayer(this.overviewLayer);
+            });
+        }
+    }
+
+    addPostLayer(postID: string) {
+        this.layerService.getPostLayer(postID).then(layer => {
+            this.postLayer = layer;
+            this.postLayer.addTo(this.map);
+            this.fitToLayer(this.postLayer);
+
+            // add globe
+            // let miniMap = new L.Control.GlobeMiniMap({
+            //     // land:'#FFFF00',
+            //     // water:'#3333FF',
+            //     // marker:'#000000'
+            //     topojsonSrc: "https://github.com/johan/world.geo.json/blob/master/countries.geo.json"
+            // }).addTo(this.map);
         });
     }
 

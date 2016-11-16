@@ -9,6 +9,16 @@ h2 {
   height: 600px;
 }
 
+#overview {
+  overflow: scroll;
+  height: 600px;
+}
+
+#post {
+  overflow: scroll;
+  height: 600px;
+}
+
 .post-panel {
   cursor: pointer;
   border: 1px solid black;
