@@ -67,7 +67,8 @@ export class BlogComponent implements OnInit {
     addOverviewLayer() {
         if (this.overviewLayer) {  // only load once
             this.overviewLayer.addTo(this.map);
-            this.fitToLayer(this.overviewLayer);
+            this.flyToLayer(this.overviewLayer);
+
         } else {
             this.layerService.getOverview().then(layer => {
                 this.overviewLayer = layer;
@@ -81,7 +82,7 @@ export class BlogComponent implements OnInit {
         this.layerService.getPostLayer(postID).then(layer => {
             this.postLayer = layer;
             this.postLayer.addTo(this.map);
-            this.fitToLayer(this.postLayer);
+            this.flyToLayer(this.postLayer);
 
             // add globe
             // let miniMap = new L.Control.GlobeMiniMap({
@@ -93,10 +94,18 @@ export class BlogComponent implements OnInit {
         });
     }
 
-    fitToLayer = function(layer) {
+    fitToLayer(layer) {
         this.map.fitBounds(layer.getBounds(), {
             padding: [40, 40]
         });
-    };
+    }
+
+    flyToLayer(layer) {
+        this.map.flyToBounds(layer.getBounds(), {
+            padding: [40, 40]
+        }, {
+            duration: 4
+        });
+    }
 
 }
