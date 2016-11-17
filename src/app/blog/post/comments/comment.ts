@@ -1,5 +1,5 @@
 export class Comment {
     text: string;
-    userID: string;
+    username: string;
     createdAt: Date;
 }

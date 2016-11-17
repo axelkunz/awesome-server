@@ -18,7 +18,7 @@ export class GuardService {
         let loggedIn: boolean = this.authService.isLoggedIn();
         if (!loggedIn) {
             console.log("GuardService: The user is not logged in and can't navigate to this site. Redirecting to login page.");
-            this.router.navigateByUrl("/");
+            this.router.navigateByUrl("/login");
         }
         return loggedIn;
     }

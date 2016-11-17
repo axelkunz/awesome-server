@@ -26,7 +26,7 @@ export class AuthService {
     login(username: string, password: string) {
         return new Promise((resolve, reject) => {
             this.userService.getByUsername(username).then(user => {
-                if (user.length && user[0].password === password) {
+                if (user && user.password === password) {
                     this.user = user;
                     resolve();
                 } else {

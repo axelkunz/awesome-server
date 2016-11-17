@@ -23,7 +23,7 @@ export class UserService {
         return this.http.get(this.configService.HOST + this.PATH)
                    .toPromise()
                    .then(function(res) {
-                       return res.json().filter(o => o.username === username);
+                       return res.json().find(o => o.username === username);
                    });
     }
 

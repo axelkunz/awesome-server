@@ -45,9 +45,9 @@ import { NewFeatureComponent } from './admin/edit-post/new-feature/new-feature.c
     HttpModule,
     RouterModule.forRoot([
       // blog routes
-      { path: "", component: LoginComponent },
+      { path: "login", component: LoginComponent },
       // { path: "blog", component: BlogComponent, canActivate: [GuardService] },
-      { path: "blog", component: BlogComponent },
+      { path: "", component: BlogComponent, canActivate: [GuardService] },
 
       // admin routes
       { path: "admin", redirectTo: "admin/dashboard", pathMatch: "full" },

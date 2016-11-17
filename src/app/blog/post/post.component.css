@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Londrina+Solid|Open+Sans');
 
 h3 {
-    font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 p {
-    font-family: 'Open Sans', sans-serif;
-    font-size: medium;
-    line-height: 1.5;
+  font-family: 'Open Sans', sans-serif;
+  font-size: medium;
+  line-height: 1.5;
 }
 
-
+:host >>> span.reference {
+  cursor: pointer;
+  color: blue;
+  font-weight: bold;
+}
