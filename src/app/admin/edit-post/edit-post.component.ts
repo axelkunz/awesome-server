@@ -36,18 +36,17 @@ export class EditPostComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
-    save() {
+    save(): void {
         this.postService.update(this.post).then(res => {
             this.router.navigateByUrl("/admin/dashboard");
         });
     }
 
-    onNewFeatureClick() {
-        console.log(`/admin/posts/${ this.postID }/new-feature`);
-        this.router.navigateByUrl(`/admin/posts/${ this.postID }/new-feature`);
+    onNewFeatureClick(): void {
+        this.router.navigateByUrl(`${ this.router.url }/new-feature`);
     }
 
-    deleteFeature(id: string) {
+    deleteFeature(id: string): void {
         this.featureService.delete(id).then(res => {
             let index = this.features.findIndex(o => o._id === id);
             this.features = this.features.splice(0, index);

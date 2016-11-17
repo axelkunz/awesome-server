@@ -4,7 +4,7 @@
 <div class="row">
 
   <!-- map -->
-  <div class="col-md-6">
+  <div class="col-md-6 visible-md-block visible-lg-block">
     <div id="map"></div>
   </div>
 
@@ -17,9 +17,8 @@
   </div>
 
   <!-- post -->
-  <div id="post" class="col-md-6" *ngIf="selectedPost">
+  <div id="post" class="col-md-6 hidden-md<" *ngIf="selectedPost">
     <button (click)="showOverview()">back</button>
     <app-post [post]="selectedPost"></app-post>
   </div>
-
 </div>

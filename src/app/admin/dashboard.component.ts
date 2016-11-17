@@ -22,20 +22,20 @@ export class DashboardComponent implements OnInit {
         private router: Router
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.postService.query().then(posts => this.posts = posts);
         this.userService.query().then(users => this.users = users);
     }
 
-    openNewPost() {
+    openNewPost(): void {
       this.router.navigateByUrl("/admin/new-post");
     }
 
-    editPost(id) {
-      this.router.navigateByUrl("/admin/posts/" + id);
+    editPost(id: string) {
+        this.router.navigateByUrl(`/admin/posts/${id}`);
     }
 
-    openUserDetails(id) {
+    openUserDetails(id): void {
         console.log("open user details");
         // $location.path("/dashboard/stories/" + id);
     }

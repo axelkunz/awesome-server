@@ -56,13 +56,24 @@ export class BlogComponent implements OnInit {
     }
 
     initMap() {
-        this.map = L.map("map").setView([0, 0], 5);
+        this.map = L.map("map", {
+            center: [50.004716, 8.263407],
+            zoom: 10,
+            minZoom: 2
+        });
+
+        this.map.invalidateSize();
+
+        // force users to stay in bounds
+        this.map.setMaxBounds([[180, -180], [-180, 200]]);
 
         // add basemap
         this.layerService.basemaps.lightOSM.addTo(this.map);
 
         // add overview features
         this.addOverviewLayer();
+
+        this.map.invalidateSize();
     }
 
     addOverviewLayer() {
@@ -74,7 +85,8 @@ export class BlogComponent implements OnInit {
             this.layerService.getOverview().then(layer => {
                 this.overviewLayer = layer;
                 this.overviewLayer.addTo(this.map);
-                // this.fitToLayer(this.overviewLayer);
+                this.map.invalidateSize();
+                this.flyToLayer(this.overviewLayer);
 
                 // highlight post in overview when it's icon is hovered
                 this.overviewLayer.on("mouseover", e => {

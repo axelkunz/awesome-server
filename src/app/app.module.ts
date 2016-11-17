@@ -45,17 +45,17 @@ import { NewFeatureComponent } from './admin/edit-post/new-feature/new-feature.c
     HttpModule,
     RouterModule.forRoot([
       // blog routes
-      { path: "", component: LoginComponent, useAsDefault: true },
-      { path: "blog", component: BlogComponent, canActivate: [GuardService] },
+      { path: "", component: LoginComponent },
+      // { path: "blog", component: BlogComponent, canActivate: [GuardService] },
+      { path: "blog", component: BlogComponent },
 
       // admin routes
-      // { path: "", redirectTo: "admin/dashboard", pathMatch: "full" },
       { path: "admin", redirectTo: "admin/dashboard", pathMatch: "full" },
-      { path: "admin/dashboard", component: DashboardComponent, canActivate: [GuardService] },
-      { path: "admin/new-user", component: NewUserComponent, canActivate: [GuardService] },
-      { path: "admin/new-post", component: NewPostComponent, canActivate: [GuardService] },
-      { path: "admin/posts/:id", component: EditPostComponent, canActivate: [GuardService] },
-      { path: "admin/posts/:id/new-feature", component: NewFeatureComponent, canActivate: [GuardService] }
+      { path: "admin/dashboard", component: DashboardComponent },
+      { path: "admin/new-user", component: NewUserComponent },
+      { path: "admin/new-post", component: NewPostComponent },
+      { path: "admin/posts/:id", component: EditPostComponent },
+      { path: "admin/posts/:id/new-feature", component: NewFeatureComponent }
     ])
   ],
   providers: [

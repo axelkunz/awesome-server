@@ -37,8 +37,6 @@
     <tr>
       <th>#</th>
       <th>Username</th>
-      <th><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Likes</th>
-      <th><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comments</th>
       <th>Role</th>
     </tr>
   </thead>
@@ -46,8 +44,6 @@
     <tr *ngFor="let user of users; let i = index" class="story" (click)="openUserDetails(user._id)">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ user.username }}</td>
-      <td>{{ user.likes }}</td>
-      <td>{{ user.comments }}</td>
       <td>
         <span class="label" [class.label-danger]="user.role === 'admin'" [class.label-primary]="user.role === 'family'" [class.label-default]="user.role === 'friend'">
           {{ user.role }}
