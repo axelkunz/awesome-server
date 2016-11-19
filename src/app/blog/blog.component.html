@@ -8,6 +8,7 @@
 
     <!-- post overview -->
     <div id="overview" class="col-md-5" *ngIf="!selectedPost">
+
       <div class="post-panel" *ngFor="let post of posts | orderBy: ['updatedAt']" (click)="showPost(post)" [class.selected]="hoveredPostID === post._id">
         {{ post.title }}
         <span class="date">{{ post.updatedAt | date: "dd.MM.yyyy"}}</span>
@@ -17,11 +18,17 @@
         </p>
         <!-- <span class="badge">neu</span> -->
       </div>
+
     </div>
 
     <!-- post -->
     <div id="post" class="col-md-5" *ngIf="selectedPost">
-      <button (click)="showOverview()">back</button>
+
+      <button class="btn btn-link" (click)="showOverview()">
+        <i class="fa fa-caret-left" aria-hidden="true"></i>
+        Übersicht
+      </button>
+
       <app-post [post]="selectedPost"></app-post>
     </div>
 

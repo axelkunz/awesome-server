@@ -1,28 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700');
 
 h3 {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 p {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1.5;
-}
-
-:host >>> span.reference {
-  cursor: pointer;
-  color: rgba(41, 130, 203, 1); /* leaflet marker color */
-  font-weight: bold;
-
-  /* add image to left of text */
-  background-image: url('https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png');
-  background-size: contain; /* fit height of image to span size */
-  background-repeat: no-repeat;
-  padding-left: 16px;  /* width of the image plus a little extra padding */
-
 }
 
 .post {
@@ -32,7 +19,35 @@ p {
   padding-right: 20px;
 }
 
-.marker {
-  background-color: green;
-  height: 14px;
+.post-date {
+  font-family: 'Lato', sans-serif;
+  color: gray;
+  margin-top: 40px;
+}
+
+p {
+  margin-bottom: 30px;
+}
+
+/* style post's inner html */
+:host >>> span.reference {
+  cursor: pointer;
+  color: rgba(41, 130, 203, 1); /* leaflet marker color */
+
+  /* add image to left of text */
+  background-image: url('https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png');
+  background-size: contain; /* fit height of image to span size */
+  background-repeat: no-repeat;
+  padding-left: 16px;  /* width of the image plus a little extra padding */
+}
+
+:host >>> figure {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+:host >>> figcaption {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
 }

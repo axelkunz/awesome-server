@@ -5,6 +5,7 @@ import {
     Renderer
 } from "@angular/core";
 import { Router } from "@angular/router";
+import * as L from "leaflet";
 
 import { Post } from "../shared/post";
 import { PostService } from "../shared/post.service";
