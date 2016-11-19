@@ -25,6 +25,7 @@ import { CommentDatePipe } from "./blog/post/comments/comment-date.pipe";
 import { LoginComponent } from './login/login.component';
 import { NewFeatureComponent } from './admin/edit-post/new-feature/new-feature.component';
 import { OrderByPipe } from './shared/order-by.pipe';
+import { ReferenceComponent } from './shared/reference/reference.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { OrderByPipe } from './shared/order-by.pipe';
     CommentDatePipe,
     LoginComponent,
     NewFeatureComponent,
-    OrderByPipe
+    OrderByPipe,
+    ReferenceComponent
   ],
   imports: [
     BrowserModule,

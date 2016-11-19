@@ -1,4 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import {
+    Component,
+    OnInit,
+    ElementRef,
+    Renderer
+} from "@angular/core";
 import { Router } from "@angular/router";
 
 import { Post } from "../shared/post";
@@ -22,7 +27,9 @@ export class BlogComponent implements OnInit {
     constructor(
         private postService: PostService,
         private layerService: LayerService,
-        private router: Router
+        private router: Router,
+        private elementRef: ElementRef,
+        private renderer: Renderer
     ) { }
 
     ngOnInit() {
@@ -30,6 +37,15 @@ export class BlogComponent implements OnInit {
             this.posts = posts.filter(o => o.published === true);
         });
         this.initMap();
+
+        // workaround for not being able to put (click) functions into innerHml
+        // Listen to click events in the component
+        this.renderer.listen(this.elementRef.nativeElement, "click", (event) => {
+            if (event.target.attributes.class && event.target.attributes.class.value.indexOf("reference") > -1) {
+                const id = event.target.attributes.class.value.split(" ")[1];
+                this.onRefClick(id);
+            }
+        });
     }
 
     showPost(post: Post) {
@@ -85,7 +101,7 @@ export class BlogComponent implements OnInit {
                 this.map.invalidateSize();
                 this.flyToLayer(this.overviewLayer);
 
-                // highlight post in overview when it's icon is hovered
+                // highlight post in overview when it"s icon is hovered
                 this.overviewLayer.on("mouseover", e => {
                     this.hoveredPostID = e.layer.feature.properties.postID;
                 });
@@ -94,7 +110,7 @@ export class BlogComponent implements OnInit {
                     this.hoveredPostID = null;
                 });
 
-                // show post when it's icon is clicked
+                // show post when it"s icon is clicked
                 this.overviewLayer.on("click", e => {
                     let clickedPost = this.posts.find(o => {
                         return o._id === e.layer.feature.properties.postID;
@@ -111,24 +127,37 @@ export class BlogComponent implements OnInit {
             this.postLayer.addTo(this.map);
             this.flyToLayer(this.postLayer);
 
-
             // add globe
             // let miniMap = new L.Control.GlobeMiniMap({
-            //     // land:'#FFFF00',
-            //     // water:'#3333FF',
-            //     // marker:'#000000'
+            //     // land:"#FFFF00",
+            //     // water:"#3333FF",
+            //     // marker:"#000000"
             //     topojsonSrc: "https://github.com/johan/world.geo.json/blob/master/countries.geo.json"
             // }).addTo(this.map);
         });
     }
 
-    fitToLayer(layer) {
+    onRefClick(featureID: string): void {
+        let marker = this.getMarkerFromLayer(this.postLayer, featureID);
+        if (marker) {
+            this.flyToMarker(marker);
+            marker.openPopup();
+        }
+    }
+
+    getMarkerFromLayer(layer: any, featureID: string) {
+        for (let marker of layer.getLayers()) {
+            if (marker.feature._id === featureID) return marker;
+        }
+    }
+
+    fitToLayer(layer): void {
         this.map.fitBounds(layer.getBounds(), {
             // padding: [40, 40]
         });
     }
 
-    flyToLayer(layer) {
+    flyToLayer(layer): void {
         this.map.flyToBounds(layer.getBounds(), {
             padding: [40, 40]
         }, {
@@ -136,4 +165,7 @@ export class BlogComponent implements OnInit {
         });
     }
 
+    flyToMarker(marker): void {
+        this.map.flyTo(marker.getLatLng());
+    }
 }

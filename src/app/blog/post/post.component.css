@@ -8,14 +8,21 @@ h3 {
 
 p {
   font-family: 'Open Sans', sans-serif;
-  font-size: medium;
+  font-size: 16px;
   line-height: 1.5;
 }
 
 :host >>> span.reference {
   cursor: pointer;
-  color: blue;
+  color: rgba(41, 130, 203, 1); /* leaflet marker color */
   font-weight: bold;
+
+  /* add image to left of text */
+  background-image: url('https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png');
+  background-size: contain; /* fit height of image to span size */
+  background-repeat: no-repeat;
+  padding-left: 16px;  /* width of the image plus a little extra padding */
+
 }
 
 .post {
@@ -23,4 +30,9 @@ p {
   padding-left: 25px;
   padding-bottom: 15px;
   padding-right: 20px;
+}
+
+.marker {
+  background-color: green;
+  height: 14px;
 }
