@@ -24,6 +24,7 @@ import { GuardService } from "./shared/guard.service";
 import { CommentDatePipe } from "./blog/post/comments/comment-date.pipe";
 import { LoginComponent } from './login/login.component';
 import { NewFeatureComponent } from './admin/edit-post/new-feature/new-feature.component';
+import { OrderByPipe } from './shared/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NewFeatureComponent } from './admin/edit-post/new-feature/new-feature.c
     CommentsComponent,
     CommentDatePipe,
     LoginComponent,
-    NewFeatureComponent
+    NewFeatureComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,7 @@ import { NewFeatureComponent } from './admin/edit-post/new-feature/new-feature.c
       // blog routes
       { path: "login", component: LoginComponent },
       // { path: "blog", component: BlogComponent, canActivate: [GuardService] },
-      { path: "", component: BlogComponent, canActivate: [GuardService] },
+      { path: "", component: BlogComponent },
 
       // admin routes
       { path: "admin", redirectTo: "admin/dashboard", pathMatch: "full" },

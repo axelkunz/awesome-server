@@ -1,21 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 login">
+      <form>
 
-<div class="row">
-  <div class="col-md-7 login">
-    <form>
+        <div class="form-group">
+          <label for="inputUsername">Benutzername</label>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Benutzername" [(ngModel)]="username" name="username" autofocus>
+        </div>
 
-      <div class="form-group">
-        <label for="inputUsername">Benutzername</label>
-        <input type="text" class="form-control" id="inputUsername" placeholder="Benutzername" [(ngModel)]="username" name="username" autofocus>
-      </div>
+        <div class="form-group">
+          <label for="inputPassword">Passwort</label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password" [(ngModel)]="password" name="password">
+        </div>
 
-      <div class="form-group">
-        <label for="inputPassword">Passwort</label>
-        <input type="password" class="form-control" id="inputPassword" placeholder="Password" [(ngModel)]="password" name="password">
-      </div>
+        <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="!username || !password">Login</button>
 
-      <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="!username || !password">Login</button>
-
-    </form>
-    <span *ngIf="errorMsg">{{ errorMsg }}</span>
+      </form>
+      <span *ngIf="errorMsg">{{ errorMsg }}</span>
+    </div>
   </div>
 </div>

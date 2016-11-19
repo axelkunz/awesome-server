@@ -1,10 +1,12 @@
 <h4 id="chapter-comments">Kommentare</h4>
+
+<!-- comments -->
 <div *ngFor="let comment of comments">
   <span class="comment-text">{{ comment.text }}</span>
+  <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(comment)"></i>
   <p>
     <span class="comment-user">{{ comment.username }}</span>
     <span class="comment-timespan">{{ comment.createdAt | date: "dd. MMM yyyy hh:mm" }}</span>
-    <!--<span class="comment-timespan" *ngIf="isToday(comment.createdAt)">heute {{ comment.createdAt | date: "hh:mm" }}</span>-->
   </p>
 </div>
 

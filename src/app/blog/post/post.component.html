@@ -1,10 +1,12 @@
-<!--<app-post data="$ctrl.post"></app-post>-->
-<h3>
-  {{ post.title }}
-  <!--<app-like-button data="$ctrl.data.likes"></app-like-button>-->
-</h3>
 
-<p [innerHtml]="post.text"></p>
+<div class="post">
+  <h3>
+    {{ post.title }}
+    <!--<app-like-button data="$ctrl.data.likes"></app-like-button>-->
+  </h3>
 
-<!--<app-likes data="$ctrl.data.likes"></app-likes>-->
-<app-comments [comments]="post.comments" (onNewComment)="addComment($event)"></app-comments>
+  <p [innerHtml]="post.text"></p>
+
+  <!--<app-likes data="$ctrl.data.likes"></app-likes>-->
+  <app-comments [comments]="post.comments" (onNewComment)="addComment($event)" (onCommentDelete)="deleteComment($event)"></app-comments>
+</div>

@@ -12,3 +12,8 @@
   font-weight: light;
   color: grey;
 }
+
+i.fa-trash {
+  color: gray;
+  margin-left: 5px;
+}

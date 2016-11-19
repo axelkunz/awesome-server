@@ -23,12 +23,9 @@ export class BlogComponent implements OnInit {
         private postService: PostService,
         private layerService: LayerService,
         private router: Router
-    ) {
-        // this.router = Router;
-    }
+    ) { }
 
     ngOnInit() {
-        // this.router = Router;
         this.postService.query().then(posts => {
             this.posts = posts.filter(o => o.published === true);
         });
@@ -133,7 +130,7 @@ export class BlogComponent implements OnInit {
 
     flyToLayer(layer) {
         this.map.flyToBounds(layer.getBounds(), {
-            // padding: [40, 40]
+            padding: [40, 40]
         }, {
             duration: 4
         });

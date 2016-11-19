@@ -79,6 +79,7 @@ router.put('/posts/:id', function (req, res) {
     var post = req.body;
     var update = {
          title: post.title,
+         subtitle: post.subtitle,
          text: post.text,
          comments: post.comments,
          published: post.published

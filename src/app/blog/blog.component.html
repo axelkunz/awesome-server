@@ -1,24 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
 
-<h1>Everything is awesome!</h1>
-
-<div class="row">
-
-  <!-- map -->
-  <div class="col-md-6 visible-md-block visible-lg-block">
-    <div id="map"></div>
-  </div>
-
-  <!-- post overview -->
-  <div id="overview" class="col-md-6" *ngIf="!selectedPost">
-    <div class="post-panel" *ngFor="let post of posts" (click)="showPost(post)" [class.selected]="hoveredPostID === post._id">
-      {{ post.title }}
-      <!-- <span class="badge">neu</span> -->
+    <!-- map -->
+    <div id="map-panel" class="col-md-7 visible-md-block visible-lg-block">
+      <div id="map"></div>
     </div>
+
+    <!-- post overview -->
+    <div id="overview" class="col-md-5" *ngIf="!selectedPost">
+      <div class="post-panel" *ngFor="let post of posts | orderBy: ['updatedAt']" (click)="showPost(post)" [class.selected]="hoveredPostID === post._id">
+        {{ post.title }}
+        <span class="date">{{ post.updatedAt | date: "dd.MM.yyyy"}}</span>
+        <p class="subtitle">
+          <img class="marker" src="https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png" />
+          {{ post.subtitle }}
+        </p>
+        <!-- <span class="badge">neu</span> -->
+      </div>
+    </div>
+
+    <!-- post -->
+    <div id="post" class="col-md-5" *ngIf="selectedPost">
+      <button (click)="showOverview()">back</button>
+      <app-post [post]="selectedPost"></app-post>
+    </div>
+
   </div>
 
-  <!-- post -->
-  <div id="post" class="col-md-6 hidden-md<" *ngIf="selectedPost">
-    <button (click)="showOverview()">back</button>
-    <app-post [post]="selectedPost"></app-post>
-  </div>
 </div>
