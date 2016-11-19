@@ -1,0 +1,17 @@
+echo "git checkout"
+git --work-tree=~/apps/awesome --git-dir=~/git/awesome checkout -f
+
+echo "change to app folder"
+cd ~/apps/awesome
+
+echo "npm install..."
+export PATH=/package/host/localhost/nodejs-4/bin:$PATH
+npm install
+
+echo "build..."
+ng build
+
+echo "restart app..."
+pm2 stop awesome
+pm2 delete awesome
+pm2 start ~/apps/awesome/server/server.js --name="awesome"

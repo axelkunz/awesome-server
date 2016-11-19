@@ -82,7 +82,8 @@ router.put('/posts/:id', function (req, res) {
          subtitle: post.subtitle,
          text: post.text,
          comments: post.comments,
-         published: post.published
+         published: post.published,
+         publishedAt: post.publishedAt
     };
     Post.findOneAndUpdate({_id: id}, update, function(err, post) {
         if (err) {

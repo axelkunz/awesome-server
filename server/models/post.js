@@ -9,7 +9,8 @@ var postSchema = new Schema({
     text: String,
     published: { type: Boolean, default: false },
     likes: Array,
-    comments: Array
+    comments: Array,
+    publishedAt: Date
 },{
     timestamps: true  // creates updatedAt and createdAt
 });

@@ -7,4 +7,5 @@ export class Post {
     storyID: string;
     comments: any[];
     likes: string[];
+    publishedAt: Date;
 }

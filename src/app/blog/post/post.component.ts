@@ -1,4 +1,5 @@
 import { Component, OnInit,  Input } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
 
 import { Post } from "../../shared/post";
 import { Comment } from "./comments/comment";
@@ -11,10 +12,16 @@ import { PostService } from "../../shared/post.service";
 })
 export class PostComponent implements OnInit {
     @Input() post: Post;
+    unsafeHtml: any;
 
-    constructor(private postService: PostService) { }
+    constructor(
+        private postService: PostService,
+        protected domSanitizer: DomSanitizer
+    ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.unsafeHtml = this.domSanitizer.bypassSecurityTrustHtml(this.post.text);
+    }
 
     addComment(comment: Comment) {
         this.post.comments.push(comment);
@@ -22,5 +29,4 @@ export class PostComponent implements OnInit {
             console.log("successfully added comment");
         });
     }
-
 }
