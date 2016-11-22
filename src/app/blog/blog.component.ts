@@ -10,6 +10,7 @@ import * as L from "leaflet";
 import { Post } from "../shared/post";
 import { PostService } from "../shared/post.service";
 import { LayerService } from "./layer.service";
+import { AuthService } from "../shared/auth.service";
 
 @Component({
     selector: "app-blog",
@@ -24,8 +25,10 @@ export class BlogComponent implements OnInit {
     overviewLayer: any;
     postLayer: any;
     hoveredPostID: string;
+    user: any;
 
     constructor(
+        private authService: AuthService,
         private postService: PostService,
         private layerService: LayerService,
         private router: Router,
@@ -34,6 +37,8 @@ export class BlogComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.user = this.authService.getUser();
+
         this.postService.query().then(posts => {
             this.posts = posts.filter(o => o.published === true);
         });
@@ -168,5 +173,9 @@ export class BlogComponent implements OnInit {
 
     flyToMarker(marker): void {
         this.map.flyTo(marker.getLatLng());
+    }
+
+    onDashboardClick(): void {
+        this.router.navigateByUrl("admin/dashboard");
     }
 }

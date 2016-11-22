@@ -43,7 +43,8 @@ export class EditPostComponent implements OnInit, OnDestroy {
     }
 
     onNewFeatureClick(): void {
-        this.router.navigateByUrl(`${ this.router.url }/new-feature`);
+        console.log(`/admin/posts/${ this.post._id }/new-feature`);
+        this.router.navigateByUrl(`/admin/posts/${ this.post._id }/new-feature`);
     }
 
     deleteFeature(id: string): void {

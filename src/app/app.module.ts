@@ -22,56 +22,83 @@ import { AuthService } from "./shared/auth.service";
 import { FeatureService } from "./shared/feature.service";
 import { GuardService } from "./shared/guard.service";
 import { CommentDatePipe } from "./blog/post/comments/comment-date.pipe";
-import { LoginComponent } from './login/login.component';
-import { NewFeatureComponent } from './admin/edit-post/new-feature/new-feature.component';
-import { OrderByPipe } from './shared/order-by.pipe';
-import { ReferenceComponent } from './shared/reference/reference.component';
+import { LoginComponent } from "./login/login.component";
+import { NewFeatureComponent } from "./admin/edit-post/new-feature/new-feature.component";
+import { OrderByPipe } from "./shared/order-by.pipe";
+import { ReferenceComponent } from "./shared/reference/reference.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    BlogComponent,
-    NewUserComponent,
-    NewPostComponent,
-    EditPostComponent,
-    PostComponent,
-    CommentsComponent,
-    CommentDatePipe,
-    LoginComponent,
-    NewFeatureComponent,
-    OrderByPipe,
-    ReferenceComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot([
-      // blog routes
-      { path: "login", component: LoginComponent },
-      // { path: "blog", component: BlogComponent, canActivate: [GuardService] },
-      { path: "", component: BlogComponent },
+    declarations: [
+        AppComponent,
+        DashboardComponent,
+        BlogComponent,
+        NewUserComponent,
+        NewPostComponent,
+        EditPostComponent,
+        PostComponent,
+        CommentsComponent,
+        CommentDatePipe,
+        LoginComponent,
+        NewFeatureComponent,
+        OrderByPipe,
+        ReferenceComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        RouterModule.forRoot([
 
-      // admin routes
-      { path: "admin", redirectTo: "admin/dashboard", pathMatch: "full" },
-      { path: "admin/dashboard", component: DashboardComponent },
-      { path: "admin/new-user", component: NewUserComponent },
-      { path: "admin/new-post", component: NewPostComponent },
-      { path: "admin/posts/:id", component: EditPostComponent },
-      { path: "admin/posts/:id/new-feature", component: NewFeatureComponent }
-    ])
-  ],
-  providers: [
-      AuthService,
-      ConfigService,
-      UserService,
-      LayerService,
-      IconService,
-      PostService,
-      FeatureService,
-      GuardService
-  ],
-  bootstrap: [AppComponent]
+            // blog routes
+            {
+                path: "login",
+                component: LoginComponent
+            },
+            {
+                path: "",
+                component: BlogComponent,
+                canActivate: [GuardService]
+            },
+            // { path: "**", redirectTo: "", pathMatch: "full" },
+
+            // admin routes
+            {
+                path: "admin/dashboard",
+                component: DashboardComponent,
+                canActivate: [GuardService]
+            },
+            {
+                path: "admin/new-user",
+                component: NewUserComponent,
+                canActivate: [GuardService]
+            },
+            {
+                path: "admin/new-post",
+                component: NewPostComponent,
+                canActivate: [GuardService]
+            },
+            {
+                path: "admin/posts/:id",
+                component: EditPostComponent,
+                canActivate: [GuardService]
+            },
+            {
+                path: "admin/posts/:id/new-feature",
+                component: NewFeatureComponent,
+                canActivate: [GuardService]
+            }
+        ])
+    ],
+    providers: [
+        AuthService,
+        ConfigService,
+        UserService,
+        LayerService,
+        IconService,
+        PostService,
+        FeatureService,
+        GuardService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

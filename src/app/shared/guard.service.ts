@@ -11,6 +11,7 @@ export class GuardService {
     ) { }
 
     canActivate() {
+        console.log(this.router.routerState);
         return this.checkIfLoggedIn();
     }
 
