@@ -1,7 +1,7 @@
 #!/bin/bash
 
-git_folder="~/apps/awesome"
-app_folder="~/git/awesome"
+git_folder="/home/shanyuan/git/awesome"
+app_folder="/home/shanyuan/apps/awesome"
 
 echo "git checkout"
 git --work-tree=$app_folder --git-dir=$git_folder checkout -f

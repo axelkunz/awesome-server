@@ -1,12 +1,13 @@
-'use strict';
+"use strict";
 
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var Post = require('./models/post');
-var GeoJson = require('./models/feature');
-var User = require('./models/user');
+var Post = require("../models/post");
+var GeoJson = require("../models/feature");
+var User = require("../models/user");
+var _ = require("lodash-node");
 
-router.get('/features', function (req, res) {
+router.get("/features", function (req, res) {
     GeoJson.find({}, function(err, features) {
         if (err) {
             throw err;
@@ -15,7 +16,7 @@ router.get('/features', function (req, res) {
     });
 });
 
-router.get('/features/:id', function (req, res) {
+router.get("/features/:id", function (req, res) {
     var id = req.params.id;
     GeoJson.findOne({ _id: id }, function(err, feature) {
         if (err) {
@@ -25,7 +26,7 @@ router.get('/features/:id', function (req, res) {
     });
 });
 
-router.post('/features', function (req, res) {
+router.post("/features", function (req, res) {
     var feature = req.body;
     GeoJson.create(feature, function(err, feature) {
         if (err) {
@@ -35,7 +36,7 @@ router.post('/features', function (req, res) {
     });
 });
 
-router.delete('/features/:id', function (req, res) {
+router.delete("/features/:id", function (req, res) {
     var id = req.params.id;
     GeoJson.findOneAndRemove({ _id: id }, function(err, feature) {
         if (err) {
@@ -45,7 +46,7 @@ router.delete('/features/:id', function (req, res) {
     });
 });
 
-router.get('/posts', function (req, res) {
+router.get("/posts", function (req, res) {
     Post.find({}, function(err, posts) {
         if (err) {
             throw err;
@@ -54,7 +55,7 @@ router.get('/posts', function (req, res) {
     });
 });
 
-router.get('/posts/:id', function (req, res) {
+router.get("/posts/:id", function (req, res) {
     var id = req.params.id;
     Post.findOne({ _id: id }, function(err, post) {
         if (err) {
@@ -64,7 +65,7 @@ router.get('/posts/:id', function (req, res) {
     });
 });
 
-router.post('/posts', function (req, res) {
+router.post("/posts", function (req, res) {
     var post = req.body;
     Post.create(post, function(err, post) {
         if (err) {
@@ -74,7 +75,7 @@ router.post('/posts', function (req, res) {
     });
 });
 
-router.put('/posts/:id', function (req, res) {
+router.put("/posts/:id", function (req, res) {
     var id = req.params.id;
     var post = req.body;
     var update = {
@@ -93,7 +94,7 @@ router.put('/posts/:id', function (req, res) {
     });
 });
 
-router.delete('/posts/:id', function (req, res) {
+router.delete("/posts/:id", function (req, res) {
     var id = req.params.id;
     Post.findOneAndRemove({ id: id }, function(err, post) {
         if (err) {
@@ -103,8 +104,8 @@ router.delete('/posts/:id', function (req, res) {
     });
 });
 
-router.get('/users', function (req, res) {
-    User.find({}, function(err, users) {
+router.get("/users", function (req, res) {
+    User.find({}, "username role", function(err, users) {
         if (err) {
             throw err;
         }
@@ -112,9 +113,9 @@ router.get('/users', function (req, res) {
     });
 });
 
-router.get('/users/:id', function (req, res) {
+router.get("/users/:id", function (req, res) {
     var id = req.params.id;
-    User.findOne({ _id: id }, function(err, user) {
+    User.findOne({ _id: id }, "username role", function(err, user) {
         if (err) {
             throw err;
         }
@@ -122,7 +123,7 @@ router.get('/users/:id', function (req, res) {
     });
 });
 
-router.post('/users', function (req, res) {
+router.post("/users", function (req, res) {
     var user = req.body;
     User.create(user, function(err, user) {
         if (err) {
@@ -132,9 +133,24 @@ router.post('/users', function (req, res) {
     });
 });
 
-router.delete('/users/:id', function (req, res) {
+router.put("/users/:id", function (req, res) {
     var id = req.params.id;
-    User.findOneAndRemove({ id: id }, function(err, user) {
+    var user = req.body;
+    var update = {
+        username: user.username,
+        role: user.role
+    };
+    User.findOneAndUpdate({_id: id}, update, function(err, user) {
+        if (err) {
+            throw err;
+        }
+        res.json(user);
+    });
+});
+
+router.delete("/users/:id", function (req, res) {
+    var id = req.params.id;
+    User.findOneAndRemove({ _id: id }, function(err, user) {
         if (err) {
             throw err;
         }
