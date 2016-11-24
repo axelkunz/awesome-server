@@ -20,7 +20,9 @@ import { IconService } from "./blog/icon.service";
 import { PostService } from "./shared/post.service";
 import { AuthService } from "./shared/auth.service";
 import { FeatureService } from "./shared/feature.service";
+import { ImageService } from "./image.service";
 import { GuardService } from "./shared/guard.service";
+
 import { CommentDatePipe } from "./blog/post/comments/comment-date.pipe";
 import { LoginComponent } from "./login/login.component";
 import { NewFeatureComponent } from "./admin/edit-post/new-feature/new-feature.component";
@@ -97,7 +99,8 @@ import { ReferenceComponent } from "./shared/reference/reference.component";
         IconService,
         PostService,
         FeatureService,
-        GuardService
+        GuardService,
+        ImageService
     ],
     bootstrap: [AppComponent]
 })

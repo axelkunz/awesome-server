@@ -11,6 +11,7 @@ var bodyParser = require("body-parser");
 var compression = require("compression");
 var cors = require("cors");
 var apiRoutes = require("./routes/api");
+var imageRoutes = require("./routes/image");
 var authRoutes = require("./routes/auth")(passport);
 
 
@@ -52,6 +53,7 @@ require("./database");
 // routes
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
+app.use(imageRoutes);
 
 app.listen(port, function () {
     console.log("Server listening on port " + port + "!");

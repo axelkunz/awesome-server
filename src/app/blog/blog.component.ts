@@ -38,7 +38,6 @@ export class BlogComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.authService.getUser();
-        console.log(this.user);
 
         this.postService.query().then(posts => {
             this.posts = posts.filter(o => o.published === true);

@@ -22,8 +22,9 @@
 }
 
 #post {
-  overflow: scroll;
   height: 700px;
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;  /* ios smooth scroll */
 }
 
 .post-panel {

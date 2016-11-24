@@ -29,6 +29,11 @@
         </label>
       </div>
 
+      <!-- show pictures -->
+
+      <input type="file" (change)="onChange($event)" placeholder="Choose picture to upload..." multiple accept="image/*">
+      <button class="btn btn-default" (click)="onUpload()">upload</button>
+
       <!-- show features -->
       <table class="table table-hover" *ngIf="features">
         <caption>Features</caption>

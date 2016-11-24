@@ -5,6 +5,7 @@ import { Post } from "../../shared/post";
 import { PostService } from "../../shared/post.service";
 import { Feature } from "../../shared/feature";
 import { FeatureService } from "../../shared/feature.service";
+import { ImageService } from "../../image.service";
 
 @Component({
     selector: "app-edit-post",
@@ -16,12 +17,14 @@ export class EditPostComponent implements OnInit, OnDestroy {
     post: Post;
     postID: string;
     features: Feature[];
+    file: string;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private postService: PostService,
-        private featureService: FeatureService
+        private featureService: FeatureService,
+        private imageService: ImageService
     ) { }
 
     ngOnInit() {
@@ -45,6 +48,17 @@ export class EditPostComponent implements OnInit, OnDestroy {
     onNewFeatureClick(): void {
         console.log(`/admin/posts/${ this.post._id }/new-feature`);
         this.router.navigateByUrl(`/admin/posts/${ this.post._id }/new-feature`);
+    }
+
+    onChange(event): void {
+        this.file = event.srcElement.files[0];  // get only first selected image
+    }
+
+    onUpload(): void {
+        console.log("clicky!");
+        console.log(this.file);
+        this.imageService.create(this.file).then(res => console.log(res));
+
     }
 
     deleteFeature(id: string): void {
