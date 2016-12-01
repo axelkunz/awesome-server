@@ -17,14 +17,10 @@ export class PostComponent implements OnInit {
     constructor(
         private postService: PostService,
         protected domSanitizer: DomSanitizer
-    ) {
-        console.log("init constructior!");
-    }
+    ) {}
 
     ngOnInit() {
-        console.log("init!");
         this.unsafeHtml = this.domSanitizer.bypassSecurityTrustHtml(this.post.text);
-        console.log(this.post);
     }
 
     addComment(comment: Comment) {

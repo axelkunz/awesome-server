@@ -9,7 +9,6 @@ import { ConfigService } from "./config.service";
 export class AuthService {
 
     // private user: User;
-
     constructor(
         private configService: ConfigService,
         private userService: UserService,
@@ -22,8 +21,6 @@ export class AuthService {
     }
 
     isLoggedIn(): boolean {
-        console.log(localStorage.getItem("token"));
-        console.log(!!localStorage.getItem("token"))
         return !!localStorage.getItem("token");
     }
 

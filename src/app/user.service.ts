@@ -12,23 +12,24 @@ export class UserService {
     constructor(private http: Http, private configService: ConfigService) { }
 
     query(): Promise<User[]> {
-        return this.http.get(this.configService.HOST + this.PATH)
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
+
+        return this.http.get(this.configService.HOST + this.PATH, { headers })
                    .toPromise()
                    .then(function(res) {
                        return res.json() as User[];
                    });
     }
 
-    getByUsername(username: string): Promise<User> {
-        return this.http.get(this.configService.HOST + this.PATH)
-                   .toPromise()
-                   .then(function(res) {
-                       return res.json().find(o => o.username === username);
-                   });
-    }
-
     create(user: User): Promise<User> {
-        let headers = new Headers({ "Content-Type": "application/json" });
+        let authToken = localStorage.getItem("token");
+        let headers = new Headers({
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`
+        });
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.configService.HOST + this.PATH, user, options)
