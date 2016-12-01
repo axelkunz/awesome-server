@@ -42,7 +42,6 @@ export class BlogComponent implements OnInit {
 
         this.postService.query().then(posts => {
             this.posts = posts.filter(o => {
-                // console.log(this.user.role === "admin");
                 return o.published === true;
             });
         });
