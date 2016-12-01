@@ -15,16 +15,26 @@ export class FeatureService {
         private configService: ConfigService
     ) { }
 
-    query(): Promise<Feature[]> {
-        return this.http.get(this.configService.HOST + this.PATH)
+    query(): Promise<any> {
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
+
+        return this.http.get(this.configService.HOST + this.PATH, { headers })
                 .toPromise()
                 .then(function(res) {
-                    return res.json().filter(o => o.properties) as Feature[];
+                    return res.json().filter(o => o.properties);
                 });
     }
 
     getByPostID(postID: string): Promise<Feature[]> {
-        return this.http.get(this.configService.HOST + this.PATH)
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
+
+        return this.http.get(this.configService.HOST + this.PATH, { headers })
                 .toPromise()
                 .then(function(res) {
                     return res.json().filter(o => o.properties && o.properties.postID === postID) as Feature[];
@@ -33,6 +43,8 @@ export class FeatureService {
 
     create(feature: Feature): Promise<Feature> {
         let headers = new Headers({ "Content-Type": "application/json" });
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.configService.HOST + this.PATH, feature, options)
@@ -54,7 +66,11 @@ export class FeatureService {
     // }
 
     delete(id: string): Promise<any> {
-        return this.http.delete(this.configService.HOST + this.PATH + id)
+        let headers = new Headers();
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
+
+        return this.http.delete(this.configService.HOST + this.PATH + id, { headers })
                    .toPromise()
                    .then(function(res) {
                        return res.json();

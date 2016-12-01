@@ -28,6 +28,7 @@ import { LoginComponent } from "./login/login.component";
 import { NewFeatureComponent } from "./admin/edit-post/new-feature/new-feature.component";
 import { OrderByPipe } from "./shared/order-by.pipe";
 import { ReferenceComponent } from "./shared/reference/reference.component";
+import { ValidPostPipe } from './valid-post.pipe';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { ReferenceComponent } from "./shared/reference/reference.component";
         LoginComponent,
         NewFeatureComponent,
         OrderByPipe,
-        ReferenceComponent
+        ReferenceComponent,
+        ValidPostPipe
     ],
     imports: [
         BrowserModule,

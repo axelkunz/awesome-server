@@ -8,7 +8,7 @@ import { ConfigService } from "./config.service";
 @Injectable()
 export class AuthService {
 
-    private user: User;
+    // private user: User;
 
     constructor(
         private configService: ConfigService,
@@ -17,15 +17,14 @@ export class AuthService {
     ) { }
 
     getUser(): User {
-        return this.user;
+        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        return currentUser;
     }
 
     isLoggedIn(): boolean {
-        if (this.user) {
-            return true;
-        } else {
-            return false;
-        };
+        console.log(localStorage.getItem("token"));
+        console.log(!!localStorage.getItem("token"))
+        return !!localStorage.getItem("token");
     }
 
     // TODO: implement proper server auth with encrypted passwords
@@ -40,8 +39,9 @@ export class AuthService {
                 .toPromise()
                 .then(res => {
                     let data = res.json();
-                    if (data.state === "success" && data.user) {
-                        this.user = data.user;
+
+                    if (data.success && data.token) {
+                        localStorage.setItem("token", data.token);
                         resolve();
                     } else {
                         reject(data.message);

@@ -26,6 +26,7 @@ export class BlogComponent implements OnInit {
     postLayer: any;
     hoveredPostID: string;
     user: any;
+    mapHeight: string = "700px";
 
     constructor(
         private authService: AuthService,
@@ -40,9 +41,15 @@ export class BlogComponent implements OnInit {
         this.user = this.authService.getUser();
 
         this.postService.query().then(posts => {
-            this.posts = posts.filter(o => o.published === true);
+            this.posts = posts.filter(o => {
+                // console.log(this.user.role === "admin");
+                return o.published === true;
+            });
         });
-        this.initMap();
+
+        if (!this.map) {
+            this.initMap();
+        }
 
         // workaround for not being able to put (click) functions into innerHml
         // Listen to click events in the component
@@ -75,6 +82,7 @@ export class BlogComponent implements OnInit {
     }
 
     initMap() {
+        console.log("init map");
         this.map = L.map("map", {
             center: [50.004716, 8.263407],
             zoom: 10,
@@ -177,6 +185,15 @@ export class BlogComponent implements OnInit {
 
     onDashboardClick(): void {
         this.router.navigateByUrl("admin/dashboard");
+    }
+
+    getImage(post): any {
+        return "url('assets/" + post._id + ".jpg')";
+        // return "url(http://eskipaper.com/images/pretty-landscape-sunset-1.jpg)";
+    }
+
+    onMapResize(event): void {
+        this.mapHeight = `${ event.target.innerHeight }px`;
     }
 
 }

@@ -16,7 +16,12 @@ export class PostService {
     ) { }
 
     query(): Promise<Post[]> {
-        return this.http.get(this.configService.HOST + this.PATH)
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
+
+        return this.http.get(this.configService.HOST + this.PATH, { headers })
                 .toPromise()
                 .then(function(res) {
                     return res.json() as Post[];
@@ -24,7 +29,12 @@ export class PostService {
     }
 
     get(id): Promise<Post> {
-        return this.http.get(this.configService.HOST + this.PATH + id)
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
+
+        return this.http.get(this.configService.HOST + this.PATH + id, { headers })
                    .toPromise()
                    .then(function(res) {
                        return res.json() as Post;
@@ -33,6 +43,8 @@ export class PostService {
 
     create(post: Post): Promise<Post> {
         let headers = new Headers({ "Content-Type": "application/json" });
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.configService.HOST + this.PATH, post, options)
@@ -44,6 +56,8 @@ export class PostService {
 
     update(post: Post): Promise<Post> {
         let headers = new Headers({ "Content-Type": "application/json" });
+        let authToken = localStorage.getItem("token");
+        headers.append("Authorization", `Bearer ${authToken}`);
         let options = new RequestOptions({ headers: headers });
 
         return this.http.put(this.configService.HOST + this.PATH + post._id, post, options)

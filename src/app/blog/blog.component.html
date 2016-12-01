@@ -3,23 +3,26 @@
 
     <!-- map -->
     <div id="map-panel" class="col-md-7 visible-md-block visible-lg-block">
-      <div id="map"></div>
+      <div id="map" (window:resize)="onMapResize($event)" [style.height]="mapHeight"></div>
     </div>
 
     <!-- post overview -->
     <div id="overview" class="col-md-5" *ngIf="!selectedPost">
-
-      <div class="post-panel" *ngFor="let post of posts | orderBy: ['updatedAt']" (click)="showPost(post)" [class.selected]="hoveredPostID === post._id">
+      <div class="post-panel" *ngFor="let post of posts | orderBy: ['updatedAt']" (click)="showPost(post)" [class.selected]="hoveredPostID === post._id"  [style.background-image]="getImage(post)">
         {{ post.title }}
-        <span class="date">{{ post.publishedAt | date: "dd. MMM yyyy"}}</span>
         <p class="subtitle">
-          <img class="marker" src="https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png" />
+
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
           {{ post.subtitle }}
+
+          <span class="date">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span>{{ post.publishedAt | date: "dd. MMM yyyy"}}</span>
+          </span>
+
         </p>
-        <!-- <span class="badge">neu</span> -->
       </div>
 
-      <!-- dashboard button -->
       <button class="btn btn-default btn-sm" *ngIf="user.role ==='admin'" (click)="onDashboardClick()">Dashboard</button>
 
     </div>

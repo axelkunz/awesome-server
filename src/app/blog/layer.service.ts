@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 
 import { ConfigService } from "../shared/config.service";
+import { FeatureService } from "../shared/feature.service";
 import { IconService } from "./icon.service";
 import * as L from "leaflet";
 
@@ -41,45 +42,49 @@ export class LayerService {
     constructor(
         private http: Http,
         private configService: ConfigService,
-        private iconService: IconService
+        private iconService: IconService,
+        private featureService: FeatureService
     ) { }
 
-    getOverview() {
+    getOverview(): any {
         return new Promise(resolve => {
             // get geoJSON feature collection for story
-            this.http.get(this.configService.HOST + this.FEATURE_PATH)
-                .toPromise()
-                .then(function(res) {
-                    let features = res.json();
-                    let layer = L.geoJSON(features, {
-                        filter: function(feature) {
-                            return feature.properties.category === "chapter" || feature.properties.category === "post";
-                        }
-                    });
-                    resolve(layer);
+            this.featureService.query().then(features => {
+                // console.log(features.length);
+                let layer = L.geoJSON(features, {
+                    filter: feature => {
+                        return feature.properties.category === "chapter" || feature.properties.category === "post";
+                    }
+                });
+                resolve(layer);
             });
         });
     }
 
     getPostLayer(postID: string) {
         return new Promise(resolve => {
-
-            this.http.get(this.configService.HOST + this.FEATURE_PATH)
-            .toPromise()
-            .then(function(res) {
-                let features = res.json();
+            this.featureService.query().then(features => {
                 let leafletLayer = L.geoJSON(features, {
-                    filter: function(feature) {
-                        return feature.properties.category !== "chapter" && feature.properties.category !== "post" && feature.properties.postID === postID;
+                    filter: feature => {
+                        return (feature.properties.category !== "chapter" || feature.properties.category !== "post") && feature.properties.postID === postID;
                     },
-                    onEachFeature: function(feature, layer) {
+                    onEachFeature: (feature, layer) => {
                         // layer.setIcon(this.iconService.hotelIcon);
                         layer.bindPopup(feature.properties.name);
                     }
                 });
                 resolve(leafletLayer);
             });
+
         });
+    }
+
+    isOverview(feature): boolean {
+        return feature.properties.category === "chapter" || feature.properties.category === "post";
+    }
+
+    isPost(feature): boolean {
+        return !this.isOverview(feature);
     }
 
 }

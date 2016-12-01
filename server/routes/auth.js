@@ -1,23 +1,30 @@
 "use strict";
 
 var express = require("express");
+var jwt = require('jsonwebtoken');
 var router = express.Router();
+
+var config = require('../config');
 
 module.exports = function(passport) {
 
 	//sends successful login state back to angular
 	router.get("/success", function(req, res) {
-		res.send({
-            state: "success",
-            user: req.user ? req.user : null
+        var token = jwt.sign(req.user, config.secret, {
+            expiresIn: 60 * 24 * 7 // 1 week
+        });
+
+        res.json({
+            success: true,
+            message: 'Authentication successfull!',
+            token: token
         });
 	});
 
 	//sends failure login state back to angular
 	router.get("/failure", function(req, res) {
 		res.send({
-            state: "failure",
-            user: null,
+            success: false,
             message: "Invalid username or password"
         });
 	});

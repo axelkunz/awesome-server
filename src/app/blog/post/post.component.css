@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Vollkorn:400,700|Fredericka+the+Great|Open+Sans:400,700|Roboto:400,700');
 
 h3 {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;;
   font-weight: bold;
+  font-size: 40px;
   margin-bottom: 30px;
 }
 
@@ -14,9 +15,9 @@ p {
 
 .post {
   padding-top: 10px;
-  padding-left: 25px;
+  padding-left: 30px;
   padding-bottom: 15px;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 .post-date {
