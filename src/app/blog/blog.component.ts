@@ -38,7 +38,7 @@ export class BlogComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.user = this.authService.getUser();
+        // this.user = this.authService.getUser();
 
         this.postService.query().then(posts => {
             this.posts = posts.filter(o => {
@@ -183,7 +183,7 @@ export class BlogComponent implements OnInit {
     }
 
     onDashboardClick(): void {
-        this.router.navigateByUrl("admin/dashboard");
+        this.router.navigateByUrl("/admin/dashboard");
     }
 
     getImage(post): any {
@@ -194,5 +194,15 @@ export class BlogComponent implements OnInit {
     onMapResize(event): void {
         this.mapHeight = `${ event.target.innerHeight }px`;
     }
+
+    onLogoutClick(): void {
+        this.authService.logout().then(() => {
+            this.router.navigateByUrl("/login");
+        });
+    }
+
+    // hasAccess(): boolean {
+    //     return
+    // }
 
 }

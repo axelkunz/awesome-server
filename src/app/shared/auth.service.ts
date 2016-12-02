@@ -24,8 +24,7 @@ export class AuthService {
         return !!localStorage.getItem("token");
     }
 
-    // TODO: implement proper server auth with encrypted passwords
-    login(username: string, password: string) {
+    login(username: string, password: string): Promise<any> {
         return new Promise((resolve, reject) => {
 
             let headers = new Headers({ "Content-Type": "application/json" });
@@ -41,10 +40,21 @@ export class AuthService {
                         localStorage.setItem("token", data.token);
                         resolve();
                     } else {
+                        localStorage.removeItem("token");
                         reject(data.message);
                     }
                 })
-                .catch(res => reject("something went wrong on the server while trying to login"));
+                .catch(res => {
+                    localStorage.removeItem("token");
+                    reject("something went wrong on the server while trying to login");
+                });
+        });
+    }
+
+    logout(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            localStorage.removeItem("token");
+            resolve();
         });
     }
 }

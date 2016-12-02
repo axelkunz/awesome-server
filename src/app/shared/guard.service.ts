@@ -11,8 +11,7 @@ export class GuardService {
     ) { }
 
     canActivate() {
-        // return this.checkIfLoggedIn();
-        return true;
+        return this.checkIfLoggedIn();
     }
 
     private checkIfLoggedIn(): boolean {
