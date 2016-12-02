@@ -45,20 +45,8 @@ export class EditPostComponent implements OnInit, OnDestroy {
         });
     }
 
-    onNewFeatureClick(): void {
-        console.log(`/admin/posts/${ this.post._id }/new-feature`);
-        this.router.navigateByUrl(`/admin/posts/${ this.post._id }/new-feature`);
-    }
-
     onChange(event): void {
         this.file = event.srcElement.files[0];  // get only first selected image
-    }
-
-    onUpload(): void {
-        console.log("clicky!");
-        console.log(this.file);
-        this.imageService.create(this.file).then(res => console.log(res));
-
     }
 
     deleteFeature(id: string): void {

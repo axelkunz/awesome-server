@@ -28,7 +28,8 @@ import { LoginComponent } from "./login/login.component";
 import { NewFeatureComponent } from "./admin/edit-post/new-feature/new-feature.component";
 import { OrderByPipe } from "./shared/order-by.pipe";
 import { ReferenceComponent } from "./shared/reference/reference.component";
-import { ValidPostPipe } from './valid-post.pipe';
+import { ValidPostPipe } from "./valid-post.pipe";
+import { DrawMapComponent } from "./draw-map/draw-map.component";
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { ValidPostPipe } from './valid-post.pipe';
         NewFeatureComponent,
         OrderByPipe,
         ReferenceComponent,
-        ValidPostPipe
+        ValidPostPipe,
+        DrawMapComponent
     ],
     imports: [
         BrowserModule,
@@ -89,6 +91,11 @@ import { ValidPostPipe } from './valid-post.pipe';
             {
                 path: "admin/posts/:id/new-feature",
                 component: NewFeatureComponent,
+                canActivate: [GuardService]
+            },
+            {
+                path: "admin/draw-map",
+                component: DrawMapComponent,
                 canActivate: [GuardService]
             }
         ])

@@ -11,5 +11,15 @@ export class Feature {
         coordinates: any[]
     };
 
-    constructor() { }
+    constructor() {
+        this.properties = {
+            postID: "",
+            category: "",
+            name: ""
+        };
+        this.geometry = {
+            type: "",
+            coordinates: []
+        };
+    }
 }

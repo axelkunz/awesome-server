@@ -1,71 +1,67 @@
 <div class="container">
-  <h3>Dashboard: Edit post</h3>
-
   <div class="row">
-    <form *ngIf="post">
-      <div class="form-group">
-        <label>Title</label>
-        <input type="text" class="form-control" placeholder="Title" name="title" [(ngModel)]="post.title">
-      </div>
+    <div class="col-md-12">
+      <h3>Edit post</h3>
 
-      <div class="form-group">
-        <label>Subtitle</label>
-        <input type="text" class="form-control" placeholder="Subtitle" name="subtitle" [(ngModel)]="post.subtitle">
-      </div>
+      <form *ngIf="post">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Title" name="title" [(ngModel)]="post.title">
+        </div>
 
-      <div class="form-group">
-        <label>Date published</label>
-        <input type="date" class="form-control" placeholder="Date published" name="publishedAt" [(ngModel)]="post.publishedAt">
-      </div>
+        <div class="form-group">
+          <label>Subtitle</label>
+          <input type="text" class="form-control" placeholder="Subtitle" name="subtitle" [(ngModel)]="post.subtitle">
+        </div>
 
-      <div class="form-group">
-        <label>Text</label>
-        <textarea class="form-control" placeholder="Text" rows="15" name="text" [(ngModel)]="post.text"></textarea>
-      </div>
+        <div class="form-group">
+          <label>Date published</label>
+          <input type="date" class="form-control" placeholder="Date published" name="publishedAt" [(ngModel)]="post.publishedAt">
+        </div>
 
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name="published" [(ngModel)]="post.published"> Publish
-        </label>
-      </div>
+        <div class="form-group">
+          <label>Text</label>
+          <textarea class="form-control" placeholder="Text" rows="15" name="text" [(ngModel)]="post.text"></textarea>
+        </div>
 
-      <!-- show pictures -->
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="published" [(ngModel)]="post.published"> Publish
+          </label>
+        </div>
 
-      <input type="file" (change)="onChange($event)" placeholder="Choose picture to upload..." multiple accept="image/*">
-      <button class="btn btn-default" (click)="onUpload()">upload</button>
+        <!-- show features -->
+        <table class="table table-hover" *ngIf="features">
+          <caption>Features</caption>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Category</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feature of features; let i = index">
 
-      <!-- show features -->
-      <table class="table table-hover" *ngIf="features">
-        <caption>Features</caption>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Category</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let feature of features; let i = index">
+              <!-- id -->
+              <td>{{ feature._id }}</td>
 
-            <!-- id -->
-            <td>{{ feature._id }}</td>
+              <!-- category -->
+              <td>
+                <i class="fa" [class.fa-bed]="feature.properties.category === 'accomodation'" [class.fa-cutlery]="feature.properties.category === 'food'" [class.fa-globe]="feature.properties.category === 'post'" [class.fa-university]="feature.properties.category === 'attraction'"
+                 aria-hidden="true"></i>
+              </td>
 
-            <!-- category -->
-            <td>
-              <i class="fa" [class.fa-bed]="feature.properties.category === 'accomodation'" [class.fa-cutlery]="feature.properties.category === 'food'" [class.fa-globe]="feature.properties.category === 'post'" [class.fa-university]="feature.properties.category === 'attraction'"
-               aria-hidden="true"></i>
-            </td>
+              <td>{{ feature.properties.name }}</td>
+              <td><button class="btn btn-link" (click)="deleteFeature(feature._id)">delete</button></td>
+            </tr>
+          </tbody>
+        </table>
 
-            <td>{{ feature.properties.name }}</td>
-            <td><button class="btn btn-link" (click)="deleteFeature(feature._id)">delete</button></td>
-          </tr>
-        </tbody>
-      </table>
+        <a [routerLink]="['/admin/posts/' + post._id + '/new-feature']">New Feature</a>
 
-      <button class="btn btn-default btn-sm" (click)="onNewFeatureClick()">new feature</button>
-
-      <button class="btn btn-default" (click)="save()">save</button>
-    </form>
+        <button class="btn btn-default" (click)="save()">save</button>
+      </form>
+    </div>
   </div>
-
 </div>

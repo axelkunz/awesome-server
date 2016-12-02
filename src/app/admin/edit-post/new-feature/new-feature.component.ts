@@ -23,8 +23,10 @@ export class NewFeatureComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        console.log("init new feature");
         this.sub = this.route.params.subscribe(params => {
             this.postID = params["id"];
+
             this.newFeature = new Feature();
             this.newFeature.properties.postID = this.postID;
 
@@ -41,7 +43,6 @@ export class NewFeatureComponent implements OnInit, OnDestroy {
     create() {
         this.newFeature.geometry.coordinates = [this.lat, this.lon];
         this.featureService.create(this.newFeature).then(res => {
-            console.log(res);
             this.router.navigateByUrl(`/admin/posts/${ this.postID }`);
         });
     }
