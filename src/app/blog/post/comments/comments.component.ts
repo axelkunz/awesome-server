@@ -25,7 +25,7 @@ export class CommentsComponent implements OnInit {
 
     create() {
         this.lock = true;
-        this.newComment.username = this.user.username;
+        this.newComment.username = this.user;
         this.newComment.createdAt = new Date();
         this.onNewComment.emit(this.newComment);
 
