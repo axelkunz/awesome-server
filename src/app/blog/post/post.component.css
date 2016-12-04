@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Vollkorn:400,700|Fredericka+the+Great|Open+Sans:400,700|Roboto:400,700');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700");
 
 h3 {
-  font-family: 'Roboto', sans-serif;;
+  font-family: "Roboto", sans-serif;;
   font-weight: bold;
   font-size: 40px;
   margin-bottom: 30px;
 }
 
 p {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
@@ -21,7 +21,7 @@ p {
 }
 
 .post-date {
-  font-family: 'Lato', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: gray;
   margin-top: 40px;
 }
@@ -30,13 +30,13 @@ p {
   margin-bottom: 30px;
 }
 
-/* style post's inner html */
+/* style post"s inner html */
 :host >>> span.reference {
   cursor: pointer;
   color: rgba(41, 130, 203, 1); /* leaflet marker color */
 
   /* add image to left of text */
-  background-image: url('https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png');
+  background-image: url("https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png");
   background-size: contain; /* fit height of image to span size */
   background-repeat: no-repeat;
   padding-left: 16px;  /* width of the image plus a little extra padding */

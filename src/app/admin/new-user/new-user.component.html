@@ -20,12 +20,12 @@
           <input type="password" class="form-control" placeholder="confirm password" name="confirmPassword" [(ngModel)]="newUser.passwordConfirm">
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Role</label>
           <select class="form-control" name="role" [(ngModel)]="newUser.role">
             <option *ngFor="let role of roles" value="{{ role }}">{{ role }}</option>
           </select>
-        </div>
+        </div> -->
 
         <button type="submit" class="btn btn-default" (click)="create()">Create</button>
 

@@ -27,7 +27,7 @@ export class NewUserComponent implements OnInit {
     create() {
         this.userService.create(this.newUser).then(res => {
             this.router.navigateByUrl("/admin/dashboard");
-    });
-  }
+        });
+    }
 
 }

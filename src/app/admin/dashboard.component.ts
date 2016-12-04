@@ -31,13 +31,12 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl("/admin/new-post");
     }
 
-    editPost(id: string) {
+    editPost(id: string): void {
         this.router.navigateByUrl(`/admin/posts/${id}`);
     }
 
-    openUserDetails(id): void {
-        console.log("open user details");
-        // $location.path("/dashboard/stories/" + id);
+    openUserDetails(id: string): void {
+        this.router.navigateByUrl(`/admin/users/${id}`);
     }
 
 }

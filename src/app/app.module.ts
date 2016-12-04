@@ -30,6 +30,7 @@ import { OrderByPipe } from "./shared/order-by.pipe";
 import { ReferenceComponent } from "./shared/reference/reference.component";
 import { ValidPostPipe } from "./valid-post.pipe";
 import { DrawMapComponent } from "./draw-map/draw-map.component";
+import { UserDetailsComponent } from "./admin/user-details/user-details.component";
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { DrawMapComponent } from "./draw-map/draw-map.component";
         OrderByPipe,
         ReferenceComponent,
         ValidPostPipe,
-        DrawMapComponent
+        DrawMapComponent,
+        UserDetailsComponent
     ],
     imports: [
         BrowserModule,
@@ -96,6 +98,11 @@ import { DrawMapComponent } from "./draw-map/draw-map.component";
             {
                 path: "admin/draw-map",
                 component: DrawMapComponent,
+                canActivate: [GuardService]
+            },
+            {
+                path: "admin/users/:id",
+                component: UserDetailsComponent,
                 canActivate: [GuardService]
             }
         ])
