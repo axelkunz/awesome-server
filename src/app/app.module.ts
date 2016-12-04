@@ -31,6 +31,7 @@ import { ReferenceComponent } from "./shared/reference/reference.component";
 import { ValidPostPipe } from "./valid-post.pipe";
 import { DrawMapComponent } from "./draw-map/draw-map.component";
 import { UserDetailsComponent } from "./admin/user-details/user-details.component";
+import { PanelComponent } from './blog/panel/panel.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import { UserDetailsComponent } from "./admin/user-details/user-details.componen
         ReferenceComponent,
         ValidPostPipe,
         DrawMapComponent,
-        UserDetailsComponent
+        UserDetailsComponent,
+        PanelComponent
     ],
     imports: [
         BrowserModule,

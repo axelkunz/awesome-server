@@ -8,20 +8,8 @@
 
     <!-- post overview -->
     <div id="overview" class="col-md-5" *ngIf="!selectedPost">
-      <div class="post-panel" *ngFor="let post of posts | orderBy: ['updatedAt']" (click)="showPost(post)" [class.selected]="hoveredPostID === post._id"  [style.background-image]="getImage(post)">
-        {{ post.title }}
-        <p class="subtitle">
 
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-          {{ post.subtitle }}
-
-          <span class="date">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-            <span>{{ post.publishedAt | date: "dd. MMM yyyy"}}</span>
-          </span>
-
-        </p>
-      </div>
+      <app-panel *ngFor="let post of posts | orderBy: ['updatedAt']" [post]="post" (panelClick)="showPost($event)"></app-panel>
 
       <button class="btn btn-default btn-sm" *ngIf="hasAccess()" (click)="onDashboardClick()">Dashboard</button>
       <button class="btn btn-default btn-sm" (click)="onLogoutClick()">Logout</button>

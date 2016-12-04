@@ -185,11 +185,6 @@ export class BlogComponent implements OnInit {
         this.router.navigateByUrl("/admin/dashboard");
     }
 
-    getImage(post): any {
-        return "url('assets/" + post._id + ".jpg')";
-        // return "url(http://eskipaper.com/images/pretty-landscape-sunset-1.jpg)";
-    }
-
     onMapResize(event): void {
         this.mapHeight = `${ event.target.innerHeight }px`;
     }
