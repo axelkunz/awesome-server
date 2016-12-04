@@ -1,10 +1,10 @@
 "use strict";
 
 var express = require("express");
-var jwt = require('jsonwebtoken');
+var jwt = require("jsonwebtoken");
 var router = express.Router();
 
-var config = require('../config');
+var config = require("../config");
 
 module.exports = function(passport) {
 
@@ -16,8 +16,12 @@ module.exports = function(passport) {
 
         res.json({
             success: true,
-            message: 'Authentication successfull!',
-            token: token
+            message: "Authentication successfull!",
+            token: token,
+			user: {
+				username: req.user.username,
+				role: req.user.role
+			}
         });
 	});
 

@@ -26,7 +26,7 @@ export class BlogComponent implements OnInit {
     postLayer: any;
     hoveredPostID: string;
     user: any;
-    mapHeight: string = "700px";
+    mapHeight: string = "768px";
 
     constructor(
         private authService: AuthService,
@@ -38,7 +38,7 @@ export class BlogComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // this.user = this.authService.getUser();
+        this.user = this.authService.getUser();
 
         this.postService.query().then(posts => {
             this.posts = posts.filter(o => {
@@ -81,7 +81,6 @@ export class BlogComponent implements OnInit {
     }
 
     initMap() {
-        console.log("init map");
         this.map = L.map("map", {
             center: [50.004716, 8.263407],
             zoom: 10,
@@ -201,8 +200,8 @@ export class BlogComponent implements OnInit {
         });
     }
 
-    // hasAccess(): boolean {
-    //     return
-    // }
+    hasAccess(): boolean {
+        return this.user.role === "admin";
+    }
 
 }

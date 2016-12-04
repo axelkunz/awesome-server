@@ -16,7 +16,7 @@ export class AuthService {
     ) { }
 
     getUser(): string {
-        return localStorage.getItem("username");
+        return JSON.parse(localStorage.getItem("user"));
     }
 
     isLoggedIn(): boolean {
@@ -35,17 +35,17 @@ export class AuthService {
                 .then(res => {
                     let data = res.json();
                     if (data.success && data.token) {
-                        localStorage.setItem("username", username);
+                        localStorage.setItem("user", JSON.stringify(data.user));
                         localStorage.setItem("token", data.token);
                         resolve();
                     } else {
-                        localStorage.removeItem("username");
+                        localStorage.removeItem("user");
                         localStorage.removeItem("token");
                         reject(data.message);
                     }
                 })
                 .catch(res => {
-                    localStorage.removeItem("username");
+                    localStorage.removeItem("user");
                     localStorage.removeItem("token");
                     reject("something went wrong on the server while trying to login");
                 });
@@ -54,7 +54,7 @@ export class AuthService {
 
     logout(): Promise<any> {
         return new Promise((resolve, reject) => {
-            localStorage.removeItem("username");
+            localStorage.removeItem("user");
             localStorage.removeItem("token");
             resolve();
         });
