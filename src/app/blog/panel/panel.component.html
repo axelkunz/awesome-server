@@ -8,7 +8,7 @@
 
       <span class="date">
         <i class="fa fa-calendar" aria-hidden="true"></i>
-        <span>{{ post.publishedAt | date: "dd. MMM yyyy"}}</span>
+        <span>{{ getFormattedDate(post.publishedAt) }}</span>
       </span>
     </p>
 
