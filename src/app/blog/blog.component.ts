@@ -194,9 +194,4 @@ export class BlogComponent implements OnInit {
             this.router.navigateByUrl("/login");
         });
     }
-
-    hasAccess(): boolean {
-        return this.user.role === "admin";
-    }
-
 }

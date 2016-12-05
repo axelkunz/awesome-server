@@ -5,6 +5,7 @@ import { UserService } from "../user.service";
 import { User } from "../user";
 import { Post } from "../shared/post";
 import { PostService } from "../shared/post.service";
+import { AuthService } from "../shared/auth.service";
 
 @Component({
     selector: "app-dashboard",
@@ -15,14 +16,19 @@ export class DashboardComponent implements OnInit {
 
     posts: Post[];
     users: User[];
+    user: any;
 
     constructor(
         private userService: UserService,
         private postService: PostService,
+        private authService: AuthService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
+        if (!this.hasAccess()) {
+            this.router.navigateByUrl(`/`);
+        }
         this.postService.query().then(posts => this.posts = posts);
         this.userService.query().then(users => this.users = users);
     }
@@ -39,4 +45,10 @@ export class DashboardComponent implements OnInit {
         this.router.navigateByUrl(`/admin/users/${id}`);
     }
 
+    hasAccess(): boolean {
+        this.user = this.authService.getUser();
+        if (this.user && this.user.role) {
+            return this.user.role === "admin";
+        }
+    }
 }
