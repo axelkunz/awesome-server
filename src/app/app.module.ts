@@ -3,6 +3,10 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
+import {
+    LocationStrategy,
+    HashLocationStrategy
+} from "@angular/common";
 
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./admin/dashboard.component";
@@ -31,7 +35,7 @@ import { ReferenceComponent } from "./shared/reference/reference.component";
 import { ValidPostPipe } from "./valid-post.pipe";
 import { DrawMapComponent } from "./draw-map/draw-map.component";
 import { UserDetailsComponent } from "./admin/user-details/user-details.component";
-import { PanelComponent } from './blog/panel/panel.component';
+import { PanelComponent } from "./blog/panel/panel.component";
 
 @NgModule({
     declarations: [
@@ -118,7 +122,8 @@ import { PanelComponent } from './blog/panel/panel.component';
         PostService,
         FeatureService,
         GuardService,
-        ImageService
+        ImageService,
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     bootstrap: [AppComponent]
 })
