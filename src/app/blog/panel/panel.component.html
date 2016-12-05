@@ -1,14 +1,17 @@
-<div class="panel" (click)="onClick()" [style.background-image]="getImage(post)">
-  {{ post.title }}
+<div>
+  <div class="post-panel" (click)="onClick()" [style.background-image]="getImage(post)">
+    {{ post.title }}
 
-  <p class="subtitle">
-    <i class="fa fa-map-marker" aria-hidden="true"></i>
-    {{ post.subtitle }}
+    <p class="subtitle">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      {{ post.subtitle }}
 
-    <span class="date">
-      <i class="fa fa-calendar" aria-hidden="true"></i>
-      <span>{{ post.publishedAt | date: "dd. MMM yyyy"}}</span>
-    </span>
-  </p>
+      <span class="date">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>{{ post.publishedAt | date: "dd. MMM yyyy"}}</span>
+      </span>
+    </p>
+
+  </div>
 
 </div>

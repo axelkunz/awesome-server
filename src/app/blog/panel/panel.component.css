@@ -1,4 +1,4 @@
-div.panel {
+div.post-panel {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
   /* text-shadow: black 0.1em 0.1em 0.2em; */
@@ -10,11 +10,10 @@ div.panel {
   padding-right: 15px;
   padding-bottom: 15px;
   padding-left: 25px;
+
   /* background: top left / cover no-repeat; */
   background-position: center center;
   opacity: 0.9;
-  /*background-color: gray;*/
-  margin: 0;
 }
 
 p.subtitle {

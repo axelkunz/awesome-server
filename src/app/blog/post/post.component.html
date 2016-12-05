@@ -1,13 +1,13 @@
 
 <div class="post">
+
   <span class="post-date">{{ post.publishedAt | date: "dd. MMM yyyy"}}</span>
+
   <h3>
     {{ post.title }}
-    <!--<app-like-button data="$ctrl.data.likes"></app-like-button>-->
   </h3>
 
   <p [innerHtml]="unsafeHtml"></p>
 
-  <!--<app-likes data="$ctrl.data.likes"></app-likes>-->
   <app-comments [comments]="post.comments" (onNewComment)="addComment($event)" (onCommentDelete)="deleteComment($event)"></app-comments>
 </div>

@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Londrina+Shadow|Londrina+Outline|Londrina+Sketch|Lato:400,700|Vollkorn:400,700,700i|Fredericka+the+Great|Open+Sans|Shrikhand|Roboto:400,500,700,900");
 
 .container-fluid {
-  padding: 0; /* reset bootstrap margin */
+  /* reset bootstrap */
+  padding: 0;
   margin: 0;
 }
 
-.container-fluid .row {
-  margin: 0; /* reset bootstrap margin */
-  padding: 0; /* reset bootstrap padding */
-  /*background-color: lightblue;*/
+.row {
+  /* reset bootstrap margin */
+  padding: 0;
+  margin: 0;
 }
 
 #map-panel {
@@ -19,8 +20,7 @@
   height: 100%;
 }
 
-#overview, #post {
-  float: right;
+#side-panel {
   padding: 0;
 }
 

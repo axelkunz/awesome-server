@@ -83,7 +83,7 @@ export class BlogComponent implements OnInit {
     initMap() {
         this.map = L.map("map", {
             center: [50.004716, 8.263407],
-            zoom: 10,
+            zoom: 2,
             minZoom: 2
         });
 
@@ -111,7 +111,7 @@ export class BlogComponent implements OnInit {
                 this.overviewLayer = layer;
                 this.overviewLayer.addTo(this.map);
                 this.map.invalidateSize();
-                this.flyToLayer(this.overviewLayer);
+                // this.flyToLayer(this.overviewLayer);
 
                 // highlight post in overview when it"s icon is hovered
                 this.overviewLayer.on("mouseover", e => {
