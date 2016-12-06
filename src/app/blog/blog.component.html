@@ -7,7 +7,7 @@
 
     <div id="side-panel" class="col-md-5 pull-right">
       <div *ngIf="!selectedPost">
-        <app-panel *ngFor="let post of posts | orderBy: ['updatedAt']" [post]="post" (panelClick)="showPost($event)"></app-panel>
+        <app-panel *ngFor="let post of posts | orderBy: ['publishedAt']" [post]="post" (panelClick)="showPost($event)"></app-panel>
       </div>
 
       <div *ngIf="selectedPost">

@@ -1,5 +1,5 @@
 <div>
-  <div class="post-panel" (click)="onClick()" [style.background-image]="getImage(post)">
+  <div class="post-panel" (click)="onClick()" [style.opacity]="getOpacity()" [style.background-image]="getImage(post)">
     {{ post.title }}
 
     <p class="subtitle">

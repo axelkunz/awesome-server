@@ -45,4 +45,8 @@ export class PanelComponent implements OnInit {
         let d = new Date(date);
         return `${ d.getDate() }. ${ month[d.getMonth()] } ${ d.getFullYear() }`;
     }
+
+    getOpacity() {
+        return this.post.published ? 1.0 : 0.5;
+    }
 }
