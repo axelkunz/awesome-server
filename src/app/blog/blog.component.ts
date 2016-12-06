@@ -187,9 +187,13 @@ export class BlogComponent implements OnInit {
         this.router.navigateByUrl("/admin/dashboard");
     }
 
-    // onMapResize(event): void {
-    //     this.mapHeight = `${ event.target.innerHeight }px`;
-    // }
+    onMapResize(event): void {
+        if (this.selectedPost) {
+            this.flyToLayer(this.postLayer);
+        } else {
+            this.flyToLayer(this.overviewLayer);
+        }
+    }
 
     onLogoutClick(): void {
         this.authService.logout().then(() => {

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div id="map-panel" class="col-md-7 hidden-sm hidden-xs">
+    <div id="map-panel" class="col-md-7 hidden-sm hidden-xs" (window:resize)="onMapResize($event)">
       <div id="map"></div>
     </div>
 
