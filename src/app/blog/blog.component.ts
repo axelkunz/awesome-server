@@ -40,12 +40,13 @@ export class BlogComponent implements OnInit {
     ngOnInit() {
         this.user = this.authService.getUser();
 
-        this.postService.query().then(posts => {
-            console.log(posts);
+        this.postService.query()
+        .then(posts => {
             this.posts = posts.filter(o => {
                 return o.published || !o.published && this.user.role === "admin";
             });
-        });
+        })
+        .catch(res => this.router.navigateByUrl("/login"));
 
         if (!this.map) {
             this.initMap();
@@ -186,9 +187,9 @@ export class BlogComponent implements OnInit {
         this.router.navigateByUrl("/admin/dashboard");
     }
 
-    onMapResize(event): void {
-        this.mapHeight = `${ event.target.innerHeight }px`;
-    }
+    // onMapResize(event): void {
+    //     this.mapHeight = `${ event.target.innerHeight }px`;
+    // }
 
     onLogoutClick(): void {
         this.authService.logout().then(() => {

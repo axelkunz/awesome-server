@@ -25,3 +25,10 @@ p.subtitle {
 span.date {
   margin-left: 6px;
 }
+
+/* expand post panels on smaller devices */
+@media (max-width: 991px) {
+  div.post-panel {
+    width: 100vw;
+  }
+}

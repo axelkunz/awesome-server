@@ -25,7 +25,9 @@ export class LoginComponent {
     onClick() {
         this.isLocked = true;
         this.authService.login(this.username, this.password).then(() => {
+            console.log("login success!, redirect!");
             this.router.navigateByUrl("/");
+            this.isLocked = false;
         }).catch(err => {
             this.errorMsg = err;
             this.isLocked = false;

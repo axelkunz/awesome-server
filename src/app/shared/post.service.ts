@@ -23,9 +23,8 @@ export class PostService {
 
         return this.http.get(this.configService.HOST + this.PATH, { headers })
                 .toPromise()
-                .then(function(res) {
-                    return res.json() as Post[];
-                });
+                .then(res => res.json() as Post[])
+                .catch(res => res.json());
     }
 
     get(id): Promise<Post> {

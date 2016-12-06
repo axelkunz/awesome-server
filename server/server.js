@@ -12,10 +12,10 @@ var compression = require("compression");
 var cors = require("cors");
 var apiRoutes = require("./routes/api");
 var authRoutes = require("./routes/auth")(passport);
-var jwt = require('jsonwebtoken');
-var mongoose = require('mongoose');
+var jwt = require("jsonwebtoken");
+var mongoose = require("mongoose");
 
-var config = require('./config');
+var config = require("./config");
 
 // middleware
 app.use(cors());
@@ -75,8 +75,8 @@ app.use(function(req, res, next) {
         // verifies secret and checks exp
         jwt.verify(token.substr(7), config.secret, function(err, decoded) {
             if (err) {
-                console.log('Failed to authenticate token.');
-                return res.json({ success: false, message: 'Failed to authenticate token.' });
+                console.log("Failed to authenticate token.");
+                return res.json({ success: false, message: "Failed to authenticate token." });
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;
@@ -87,10 +87,10 @@ app.use(function(req, res, next) {
     } else {
         // if there is no token
         // return an error
-        console.log('No token provided.');
+        console.log("No token provided.");
         return res.status(403).send({
             success: false,
-            message: 'No token provided.'
+            message: "No token provided."
         });
     }
 });

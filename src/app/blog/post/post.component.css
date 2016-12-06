@@ -21,9 +21,9 @@ p {
 
 .post {
   padding-top: 10px;
-  padding-left: 30px;
+  padding-left: 25px;
   padding-bottom: 15px;
-  padding-right: 30px;
+  padding-right: 25px;
 }
 
 .post-date {
@@ -58,4 +58,14 @@ p {
 :host >>> iframe {
   width: 100%;
   height: 250px;
+}
+
+/* hide location links on smaller devices */
+@media (max-width: 991px) {
+  :host >>> span.reference {
+    cursor: default;
+    color: black;
+    padding-left: 0px;
+    background-image:none;
+  }
 }

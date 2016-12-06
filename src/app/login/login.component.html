@@ -13,7 +13,7 @@
           <input type="password" class="form-control" id="inputPassword" placeholder="Password" [(ngModel)]="password" name="password">
         </div>
 
-        <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="!username || !password">Login</button>
+        <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="!username || isLocked">Login</button>
 
       </form>
 
