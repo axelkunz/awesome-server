@@ -27,6 +27,7 @@ export class BlogComponent implements OnInit {
     hoveredPostID: string;
     user: any;
     mapHeight: string = "768px";
+    loading: boolean;
 
     constructor(
         private authService: AuthService,
@@ -38,6 +39,7 @@ export class BlogComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.loading = true;
         this.user = this.authService.getUser();
 
         this.postService.query()
@@ -45,6 +47,8 @@ export class BlogComponent implements OnInit {
             this.posts = posts.filter(o => {
                 return o.published || !o.published && this.user.role === "admin";
             });
+            console.log("done!");
+            this.loading = false;
         })
         .catch(res => this.router.navigateByUrl("/login"));
 
