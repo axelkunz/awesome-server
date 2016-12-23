@@ -54,6 +54,23 @@ export class BlogComponent implements OnInit {
         if (!this.map) {
             this.initMap();
         }
+
+        // workaround for not being able to put (click) functions into innerHml
+        // Listen to click events in the component
+        this.renderer.listen(this.elementRef.nativeElement, "click", (event) => {
+            if (event.target.attributes.class && event.target.attributes.class.value.indexOf("reference") > -1) {
+                const id = event.target.attributes.class.value.split(" ")[1];
+                this.onRefClick(id);
+            }
+        });
+    }
+
+    onRefClick(featureID: string): void {
+        let marker = this.getMarkerFromLayer(this.postLayer, featureID);
+        if (marker) {
+            this.flyToMarker(marker);
+            marker.openPopup();
+        }
     }
 
     showPost(post: Post) {
@@ -126,6 +143,12 @@ export class BlogComponent implements OnInit {
             //     topojsonSrc: "https://github.com/johan/world.geo.json/blob/master/countries.geo.json"
             // }).addTo(this.map);
         });
+    }
+
+    getMarkerFromLayer(layer: any, featureID: string) {
+        for (let marker of layer.getLayers()) {
+            if (marker.feature._id === featureID) return marker;
+        }
     }
 
     fitToLayer(layer): void {
