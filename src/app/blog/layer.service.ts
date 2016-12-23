@@ -54,6 +54,9 @@ export class LayerService {
                 let layer = L.geoJSON(features, {
                     filter: feature => {
                         return feature.properties.category === "chapter" || feature.properties.category === "post";
+                    },
+                    onEachFeature: (feature, layer) => {
+                        layer.bindPopup(feature.properties.name);
                     }
                 });
                 resolve(layer);

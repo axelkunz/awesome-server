@@ -47,7 +47,6 @@ export class BlogComponent implements OnInit {
             this.posts = posts.filter(o => {
                 return o.published || !o.published && this.user.role === "admin";
             });
-            console.log("done!");
             this.loading = false;
         })
         .catch(res => this.router.navigateByUrl("/login"));
@@ -55,15 +54,6 @@ export class BlogComponent implements OnInit {
         if (!this.map) {
             this.initMap();
         }
-
-        // workaround for not being able to put (click) functions into innerHml
-        // Listen to click events in the component
-        this.renderer.listen(this.elementRef.nativeElement, "click", (event) => {
-            if (event.target.attributes.class && event.target.attributes.class.value.indexOf("reference") > -1) {
-                const id = event.target.attributes.class.value.split(" ")[1];
-                this.onRefClick(id);
-            }
-        });
     }
 
     showPost(post: Post) {
@@ -118,23 +108,6 @@ export class BlogComponent implements OnInit {
                 this.overviewLayer.addTo(this.map);
                 this.map.invalidateSize();
                 // this.flyToLayer(this.overviewLayer);
-
-                // highlight post in overview when it"s icon is hovered
-                this.overviewLayer.on("mouseover", e => {
-                    this.hoveredPostID = e.layer.feature.properties.postID;
-                });
-
-                this.overviewLayer.on("mouseout", e => {
-                    this.hoveredPostID = null;
-                });
-
-                // show post when it"s icon is clicked
-                this.overviewLayer.on("click", e => {
-                    let clickedPost = this.posts.find(o => {
-                        return o._id === e.layer.feature.properties.postID;
-                    });
-                    this.showPost(clickedPost);
-                });
             });
         }
     }
@@ -155,20 +128,6 @@ export class BlogComponent implements OnInit {
         });
     }
 
-    onRefClick(featureID: string): void {
-        let marker = this.getMarkerFromLayer(this.postLayer, featureID);
-        if (marker) {
-            this.flyToMarker(marker);
-            marker.openPopup();
-        }
-    }
-
-    getMarkerFromLayer(layer: any, featureID: string) {
-        for (let marker of layer.getLayers()) {
-            if (marker.feature._id === featureID) return marker;
-        }
-    }
-
     fitToLayer(layer): void {
         this.map.fitBounds(layer.getBounds(), {
             // padding: [40, 40]
@@ -185,10 +144,6 @@ export class BlogComponent implements OnInit {
 
     flyToMarker(marker): void {
         this.map.flyTo(marker.getLatLng());
-    }
-
-    onDashboardClick(): void {
-        this.router.navigateByUrl("/admin/dashboard");
     }
 
     onMapResize(event): void {
