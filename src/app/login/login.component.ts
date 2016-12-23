@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { UserService } from "../user.service";
@@ -9,7 +9,7 @@ import { AuthService } from "../shared/auth.service";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
     username: string;
     password: string;
@@ -21,6 +21,12 @@ export class LoginComponent {
         private userService: UserService,
         private router: Router
     ) { }
+
+    ngOnInit() {
+        if (this.authService.isLoggedIn()) {
+            this.router.navigateByUrl("/");
+        }
+    }
 
     onClick() {
         this.isLocked = true;
