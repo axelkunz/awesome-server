@@ -81,7 +81,6 @@ module.exports = function(passport) {
                 message: 'No token provided.'
             });
         }
-
     });
 
 	return router;

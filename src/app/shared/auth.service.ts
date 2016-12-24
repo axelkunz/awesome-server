@@ -51,6 +51,30 @@ export class AuthService {
 
     }
 
+    verify(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if (!localStorage.getItem("token")) {
+                reject();
+            }
+
+            // check if token is valid
+            let headers = new Headers({ "Content-Type": "application/json" });
+            let options = new RequestOptions({ headers: headers });
+            let authToken = localStorage.getItem("token");
+            headers.append("Authorization", `Bearer ${ authToken }`);
+
+            return this.http.post(this.configService.HOST + "/auth/verify", {}, options)
+                .toPromise()
+                .then(res => {
+                    let data = res.json();
+                    if (data.success) {
+                        resolve(data);
+                    }
+                })
+                .catch((res: any) => reject(res.json() || "Server error"));
+        });
+    }
+
     login(username: string, password: string): Promise<any> {
         return new Promise((resolve, reject) => {
 

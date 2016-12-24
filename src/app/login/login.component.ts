@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // if (this.authService.isLoggedIn()) {
-        //     this.router.navigateByUrl("/");
-        // }
+        this.authService.verify()
+        .then(() => this.router.navigateByUrl("/"))
+        .catch(() => console.log("not valid :/"));
     }
 
     onClick() {
