@@ -76,7 +76,10 @@ app.use(function(req, res, next) {
         jwt.verify(token.substr(7), config.secret, function(err, decoded) {
             if (err) {
                 console.log("Failed to authenticate token.");
-                return res.json({ success: false, message: "Failed to authenticate token." });
+                return res.status(403).send({
+                    success: false,
+                    message: "Failed to authenticate token."
+                });
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;

@@ -58,6 +58,8 @@ export class AuthService {
 
     verify(): Promise<any> {
         return new Promise((resolve, reject) => {
+
+            // console.log(this.getToken());
             if (!this.getToken()) {
                 reject();
             }

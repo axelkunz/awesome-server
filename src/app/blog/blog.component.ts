@@ -48,8 +48,9 @@ export class BlogComponent implements OnInit {
                 return o.published || !o.published && this.user.role === "admin";
             });
             this.loading = false;
-        })
-        .catch(res => this.router.navigateByUrl("/login"));
+        });
+
+        this.authService.verify().catch(() => this.router.navigateByUrl("/login"));
 
         if (!this.map) {
             this.initMap();
@@ -177,9 +178,4 @@ export class BlogComponent implements OnInit {
         }
     }
 
-    onLogoutClick(): void {
-        this.authService.logout().then(() => {
-            this.router.navigateByUrl("/login");
-        });
-    }
 }
