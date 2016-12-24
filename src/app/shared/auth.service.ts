@@ -2,8 +2,6 @@ import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 
-import { User } from "../user";
-import { UserService } from "../user.service";
 import { ConfigService } from "./config.service";
 
 @Injectable()
@@ -14,7 +12,6 @@ export class AuthService {
     // private user: User;
     constructor(
         private configService: ConfigService,
-        private userService: UserService,
         private http: Http
     ) { }
 
