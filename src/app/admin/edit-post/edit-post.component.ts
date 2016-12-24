@@ -55,6 +55,14 @@ export class EditPostComponent implements OnInit, OnDestroy {
         this.post.text += "\n<br><br>\n";
     }
 
+    onPictureClick(): void {
+        this.post.text += `\n<figure>\n  <img src="images/*/*.jpg" class="img-responsive img-rounded">\n</figure>\n`;
+    }
+
+    onLocationClick(): void {
+        this.post.text += `\n<span class="reference location-id">Location</span>\n`;
+    }
+
     deleteFeature(id: string): void {
         this.featureService.delete(id).then(res => {
             let index = this.features.findIndex(o => o._id === id);
