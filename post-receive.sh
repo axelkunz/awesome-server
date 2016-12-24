@@ -4,7 +4,7 @@ git_folder="/home/shanyuan/git/awesome"
 app_folder="/home/shanyuan/apps/awesome"
 
 echo "backup previous version"
-cp $app_folder/dist /home/shanyuan/dumps/dist_$(date "+%Y-%m-%d_%H-%M-%S")
+cp -r $app_folder/dist /home/shanyuan/dumps/dist_$(date "+%Y-%m-%d_%H-%M-%S")
 
 echo "git checkout"
 git --work-tree=$app_folder --git-dir=$git_folder checkout -f

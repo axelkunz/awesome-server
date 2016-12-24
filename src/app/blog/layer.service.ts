@@ -69,7 +69,7 @@ export class LayerService {
             this.featureService.query().then(features => {
                 let leafletLayer = L.geoJSON(features, {
                     filter: feature => {
-                        return (feature.properties.category !== "chapter" || feature.properties.category !== "post") && feature.properties.postID === postID;
+                        return feature.properties.category !== "chapter" && feature.properties.category !== "post" && feature.properties.postID === postID;
                     },
                     onEachFeature: (feature, layer) => {
                         // layer.setIcon(this.iconService.hotelIcon);
