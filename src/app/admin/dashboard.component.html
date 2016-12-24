@@ -3,60 +3,71 @@
     <div class="col-md-12">
       <h3>Dashboard</h3>
 
+      <ul class="nav nav-tabs">
+        <li role="presentation" [class.active]="!showUsers" (click)="showUsers = false">
+          <a href="#">Posts</a>
+        </li>
+        <li role="presentation" [class.active]="showUsers" (click)="showUsers = true">
+          <a href="#">Users</a>
+        </li>
+      </ul>
+
       <!-- show posts -->
-      <table class="table table-hover" *ngIf="posts">
-        <caption>Posts</caption>
-        <thead>
-          <tr>
-            <th>
-              <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-              Published
-            </th>
-            <th>Title</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let post of posts | orderBy: ['publishedAt']; let i = index" (click)="editPost(post._id)">
-            <td>{{ post.publishedAt | date: "dd.MM.yyyy hh:mm" }}</td>
-            <td>{{ post.title }}</td>
-            <td>
-              <span class="label label-default" *ngIf="!post.published">Draft</span>
-              <span class="label label-success" *ngIf="post.published">Published</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="posts" *ngIf="!showUsers">
+        <table class="table table-hover" *ngIf="posts">
+          <thead>
+            <tr>
+              <th>
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                Published
+              </th>
+              <th>Title</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of posts | orderBy: ['publishedAt']: 'desc'; let i = index" (click)="editPost(post._id)">
+              <td>{{ post.publishedAt | date: "dd.MM.yyyy" }}</td>
+              <td>{{ post.title }}</td>
+              <td>
+                <span class="label label-default" *ngIf="!post.published">Draft</span>
+                <span class="label label-success" *ngIf="post.published">Published</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-      <!--<button type="submit" class="btn btn-default" (click)="save()">Save</button>-->
-      <button class="btn btn-default" (click)="openNewPost()">Create new post</button>
+        <!--<button type="submit" class="btn btn-default" (click)="save()">Save</button>-->
+        <button class="btn btn-default" (click)="openNewPost()">Create new post</button>
+      </div>
 
-      <!-- show users -->
-      <table class="table table-hover">
-        <caption>Users</caption>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Username</th>
-            <th>Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users; let i = index" class="story" (click)="openUserDetails(user._id)">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ user.username }}</td>
-            <td>
-              <span class="label" [class.label-danger]="user.role === 'admin'" [class.label-primary]="user.role === 'family'" [class.label-default]="user.role === 'friend'">
-                {{ user.role }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="users" *ngIf="showUsers">
+        <!-- show users -->
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users | orderBy: ['username']; let i = index" class="story" (click)="openUserDetails(user._id)">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ user.username }}</td>
+              <td>
+                <span class="label" [class.label-danger]="user.role === 'admin'" [class.label-primary]="user.role === 'family'" [class.label-default]="user.role === 'friend'">
+                  {{ user.role }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-      <!-- create new user -->
-      <a [routerLink]="['/admin/new-user']">Create new user</a>
-    </div>
+        <!-- create new user -->
+        <a [routerLink]="['/admin/new-user']">Create new user</a>
+      </div>
 
-  </div>
+    </div><!-- col-md-12 -->
+  </div><!-- row -->
 </div>

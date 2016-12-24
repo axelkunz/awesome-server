@@ -6,8 +6,10 @@ import * as _ from "lodash";
 })
 export class OrderByPipe implements PipeTransform {
 
-    transform(value: any[], args?: any): any[] {
-        return _.orderBy(value, [args[0]], ["desc"]);
+    transform(value: any[], arg1: any, arg2: any): any[] {
+        const property = arg1;
+        const order = arg2 || "asc";
+        return _.orderBy(value, [user => user[property].toLowerCase()], [order]);
     }
 
 }
