@@ -18,6 +18,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
     postID: string;
     features: Feature[];
     file: string;
+    isSaved: boolean = true;
 
     constructor(
         private route: ActivatedRoute,
@@ -41,12 +42,13 @@ export class EditPostComponent implements OnInit, OnDestroy {
 
     save(): void {
         this.postService.update(this.post).then(res => {
-            this.router.navigateByUrl("/admin/dashboard");
+            this.isSaved = true;
+            // this.router.navigateByUrl("/admin/dashboard");
         });
     }
 
-    onChange(event): void {
-        this.file = event.srcElement.files[0];  // get only first selected image
+    onPostChange(e): void {
+        this.isSaved = false;
     }
 
     deleteFeature(id: string): void {

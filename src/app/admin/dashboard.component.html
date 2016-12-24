@@ -8,19 +8,17 @@
         <caption>Posts</caption>
         <thead>
           <tr>
-            <th>#</th>
             <th>
               <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-              Created
+              Published
             </th>
             <th>Title</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let post of posts; let i = index" (click)="editPost(post._id)">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ post.createdAt | date: "dd.MM.yyyy hh:mm" }}</td>
+          <tr *ngFor="let post of posts | orderBy: ['publishedAt']; let i = index" (click)="editPost(post._id)">
+            <td>{{ post.publishedAt | date: "dd.MM.yyyy hh:mm" }}</td>
             <td>{{ post.title }}</td>
             <td>
               <span class="label label-default" *ngIf="!post.published">Draft</span>
@@ -31,7 +29,7 @@
       </table>
 
       <!--<button type="submit" class="btn btn-default" (click)="save()">Save</button>-->
-      <button class="btn btn-default" (click)="openNewPost()">new post</button>
+      <button class="btn btn-default" (click)="openNewPost()">Create new post</button>
 
       <!-- show users -->
       <table class="table table-hover">
@@ -57,7 +55,7 @@
       </table>
 
       <!-- create new user -->
-      <a [routerLink]="['/admin/new-user']">New user</a>
+      <a [routerLink]="['/admin/new-user']">Create new user</a>
     </div>
 
   </div>
