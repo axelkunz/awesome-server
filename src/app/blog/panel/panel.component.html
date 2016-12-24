@@ -10,6 +10,11 @@
         <i class="fa fa-calendar" aria-hidden="true"></i>
         <span>{{ getFormattedDate(post.publishedAt) }}</span>
       </span>
+
+      <span class="date">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+        <span>{{ post.comments.length }}</span>
+      </span>
     </p>
 
   </div>
