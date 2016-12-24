@@ -37,6 +37,10 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl("/admin/new-post");
     }
 
+    openNewUser(): void {
+      this.router.navigateByUrl("/admin/new-user");
+    }
+
     editPost(id: string): void {
         this.router.navigateByUrl(`/admin/posts/${id}`);
     }
