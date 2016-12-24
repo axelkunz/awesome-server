@@ -107,7 +107,7 @@ export class BlogComponent implements OnInit {
         this.map.setMaxBounds([[180, -180], [-180, 200]]);
 
         // add basemap
-        this.layerService.basemaps.lightOSM.addTo(this.map);
+        this.layerService.basemaps.light.addTo(this.map);
 
         // add overview features
         this.addOverviewLayer();
