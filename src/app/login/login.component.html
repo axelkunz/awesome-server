@@ -10,16 +10,16 @@
 
         <div class="form-group">
           <label for="inputPassword">Passwort</label>
-          <input type="password" class="form-control" id="inputPassword" placeholder="Password" [(ngModel)]="password" name="password">
+          <input type="password" class="form-control" id="inputPassword" placeholder="Passwort" [(ngModel)]="password" name="password">
         </div>
 
-        <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="!username || isLocked">Login</button>
+        <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="!username || isLocked">Anmelden</button>
 
       </form>
 
       <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Error!</strong> {{ errorMsg }}
+        <strong>Fehler!</strong> {{ errorMsg }}
       </div>
 
     </div>

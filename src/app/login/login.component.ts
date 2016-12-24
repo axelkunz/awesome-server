@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     onClick() {
         this.isLocked = true;
         this.authService.login(this.username, this.password).then(() => {
-            console.log("login success!, redirect!");
             this.router.navigateByUrl("/");
             this.isLocked = false;
         }).catch(err => {
