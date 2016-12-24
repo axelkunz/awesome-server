@@ -25,6 +25,10 @@
           <textarea class="form-control" placeholder="Text" rows="15" name="text" [(ngModel)]="post.text" (ngModelChange)="onPostChange($event)"></textarea>
         </div>
 
+        <button type="button" class="btn btn-default btn-xs" (click)="onBreakClick()">Break</button>
+        <button type="button" class="btn btn-default btn-xs" (click)="onPictureClick()">Picture</button>
+        <button type="button" class="btn btn-default btn-xs" (click)="onLocationClick()">Location</button>
+
         <div class="checkbox">
           <label>
             <input type="checkbox" name="published" [(ngModel)]="post.published" (ngModelChange)="onPostChange($event)"> Publish

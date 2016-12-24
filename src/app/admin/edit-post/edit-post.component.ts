@@ -51,6 +51,10 @@ export class EditPostComponent implements OnInit, OnDestroy {
         this.isSaved = false;
     }
 
+    onBreakClick(): void {
+        this.post.text += "\n<br><br>\n";
+    }
+
     deleteFeature(id: string): void {
         this.featureService.delete(id).then(res => {
             let index = this.features.findIndex(o => o._id === id);

@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        if (!this.hasAccess()) {
+        if (!this.authService.isLoggedIn() || !this.hasAccess()) {
             this.router.navigateByUrl(`/`);
         }
         this.postService.query().then(posts => this.posts = posts);

@@ -22,8 +22,13 @@ export class AuthService {
         return JSON.parse(localStorage.getItem("user"));
     }
 
+    getToken(): string {
+        let user = JSON.parse(localStorage.getItem("user"));
+        return user.token;
+    }
+
     isLoggedIn() {
-        return !!localStorage.getItem("token");
+        return !!localStorage.getItem("user");
         // return new Promise((resolve, reject) => {
         //     // check if token exists
         //     if (!localStorage.getItem("token")) {
@@ -53,14 +58,14 @@ export class AuthService {
 
     verify(): Promise<any> {
         return new Promise((resolve, reject) => {
-            if (!localStorage.getItem("token")) {
+            if (!this.getToken()) {
                 reject();
             }
 
             // check if token is valid
             let headers = new Headers({ "Content-Type": "application/json" });
             let options = new RequestOptions({ headers: headers });
-            let authToken = localStorage.getItem("token");
+            let authToken = this.getToken();
             headers.append("Authorization", `Bearer ${ authToken }`);
 
             return this.http.post(this.configService.HOST + "/auth/verify", {}, options)
@@ -87,18 +92,20 @@ export class AuthService {
                 .then(res => {
                     let data = res.json();
                     if (data.success && data.token) {
-                        localStorage.setItem("user", JSON.stringify(data.user));
-                        localStorage.setItem("token", data.token);
+                        let user = {
+                            username: data.user.username,
+                            role: data.user.role,
+                            token: data.token
+                        }
+                        localStorage.setItem("user", JSON.stringify(user));
                         resolve();
                     } else {
                         localStorage.removeItem("user");
-                        localStorage.removeItem("token");
                         reject(data.message);
                     }
                 })
                 .catch(res => {
                     localStorage.removeItem("user");
-                    localStorage.removeItem("token");
                     reject("something went wrong on the server while trying to login");
                 });
         });
@@ -107,7 +114,6 @@ export class AuthService {
     logout(): Promise<any> {
         return new Promise((resolve, reject) => {
             localStorage.removeItem("user");
-            localStorage.removeItem("token");
             resolve();
         });
     }
