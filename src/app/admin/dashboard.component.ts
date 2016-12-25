@@ -29,8 +29,14 @@ export class DashboardComponent implements OnInit {
         if (!this.authService.isLoggedIn() || !this.hasAccess()) {
             this.router.navigateByUrl(`/`);
         }
-        this.postService.query().then(posts => this.posts = posts);
-        this.userService.query().then(users => this.users = users);
+
+        this.postService.query()
+        .then(posts => this.posts = posts)
+        .catch(() => this.router.navigateByUrl("/login"));
+
+        this.userService.query()
+        .then(users => this.users = users)
+        .catch(() => this.router.navigateByUrl("/login"));
     }
 
     openNewPost(): void {

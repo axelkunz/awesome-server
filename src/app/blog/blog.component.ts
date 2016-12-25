@@ -54,7 +54,10 @@ export class BlogComponent implements OnInit {
         this.authService.verify().catch(() => this.router.navigateByUrl("/login"));
 
         if (!this.map) {
-            this.initMap();
+            setTimeout(() => {
+                this.initMap();  // init with timout to finish rendering dom
+            }, 500);
+
         }
 
         // workaround for not being able to put (click) functions into innerHml
@@ -102,8 +105,6 @@ export class BlogComponent implements OnInit {
             minZoom: 2
         });
 
-        this.map.invalidateSize();
-
         // force users to stay in bounds
         this.map.setMaxBounds([[180, -180], [-180, 200]]);
 
@@ -113,7 +114,6 @@ export class BlogComponent implements OnInit {
         // add overview features
         this.addOverviewLayer();
 
-        this.map.invalidateSize();
     }
 
     addOverviewLayer() {
@@ -125,7 +125,6 @@ export class BlogComponent implements OnInit {
             this.layerService.getOverview().then(layer => {
                 this.overviewLayer = layer;
                 this.overviewLayer.addTo(this.map);
-                this.map.invalidateSize();
                 // this.flyToLayer(this.overviewLayer);
             });
         }
@@ -172,11 +171,8 @@ export class BlogComponent implements OnInit {
     }
 
     onMapResize(event): void {
-        // if (this.selectedPost) {
-        //     this.flyToLayer(this.postLayer);
-        // } else {
-        //     this.flyToLayer(this.overviewLayer);
-        // }
+        console.log("window resize");
+        this.map.invalidateSize();
     }
 
 }
