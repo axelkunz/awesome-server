@@ -34,9 +34,8 @@ export class PostService {
     get(id): Promise<Post> {
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        let authToken = localStorage.getItem("token");
+        let authToken = this.authService.getToken();
         headers.append("Authorization", `Bearer ${authToken}`);
-
         return this.http.get(this.configService.HOST + this.PATH + id, { headers })
                    .toPromise()
                    .then(function(res) {
@@ -46,7 +45,7 @@ export class PostService {
 
     create(post: Post): Promise<Post> {
         let headers = new Headers({ "Content-Type": "application/json" });
-        let authToken = localStorage.getItem("token");
+        let authToken = this.authService.getToken();
         headers.append("Authorization", `Bearer ${authToken}`);
         let options = new RequestOptions({ headers: headers });
 
@@ -59,7 +58,7 @@ export class PostService {
 
     update(post: Post): Promise<Post> {
         let headers = new Headers({ "Content-Type": "application/json" });
-        let authToken = localStorage.getItem("token");
+        let authToken = this.authService.getToken();
         headers.append("Authorization", `Bearer ${authToken}`);
         let options = new RequestOptions({ headers: headers });
 
