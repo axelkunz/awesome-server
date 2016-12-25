@@ -48,7 +48,8 @@ export class BlogComponent implements OnInit {
                 return o.published || !o.published && this.user.role === "admin";
             });
             this.loading = false;
-        });
+        })
+        .catch(() => this.router.navigateByUrl("/login"));
 
         this.authService.verify().catch(() => this.router.navigateByUrl("/login"));
 
@@ -171,11 +172,11 @@ export class BlogComponent implements OnInit {
     }
 
     onMapResize(event): void {
-        if (this.selectedPost) {
-            this.flyToLayer(this.postLayer);
-        } else {
-            this.flyToLayer(this.overviewLayer);
-        }
+        // if (this.selectedPost) {
+        //     this.flyToLayer(this.postLayer);
+        // } else {
+        //     this.flyToLayer(this.overviewLayer);
+        // }
     }
 
 }

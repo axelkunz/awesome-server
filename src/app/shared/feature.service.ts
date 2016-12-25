@@ -33,7 +33,7 @@ export class FeatureService {
     getByPostID(postID: string): Promise<Feature[]> {
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        let authToken = localStorage.getItem("token");
+        let authToken = this.authService.getToken();
         headers.append("Authorization", `Bearer ${authToken}`);
 
         return this.http.get(this.configService.HOST + this.PATH, { headers })
@@ -45,7 +45,7 @@ export class FeatureService {
 
     create(feature: Feature): Promise<Feature> {
         let headers = new Headers({ "Content-Type": "application/json" });
-        let authToken = localStorage.getItem("token");
+        let authToken = this.authService.getToken();
         headers.append("Authorization", `Bearer ${authToken}`);
         let options = new RequestOptions({ headers: headers });
 
@@ -69,9 +69,8 @@ export class FeatureService {
 
     delete(id: string): Promise<any> {
         let headers = new Headers();
-        let authToken = localStorage.getItem("token");
+        let authToken = this.authService.getToken();
         headers.append("Authorization", `Bearer ${authToken}`);
-
         return this.http.delete(this.configService.HOST + this.PATH + id, { headers })
                    .toPromise()
                    .then(function(res) {
