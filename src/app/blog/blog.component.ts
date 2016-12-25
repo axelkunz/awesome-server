@@ -144,6 +144,13 @@ export class BlogComponent implements OnInit {
             //     topojsonSrc: "https://github.com/johan/world.geo.json/blob/master/countries.geo.json"
             // }).addTo(this.map);
         });
+        // let options = {
+        //   land: '#FFFF00',
+        //   water: '#3333FF',
+        //   marker: '#000000',
+        //   topojsonSrc: 'https://github.com/johan/world.geo.json/blob/master/countries.geo.json'
+        // }
+        // let miniMap = new L.Control.GlobeMiniMap(options).addTo(this.map);
     }
 
     getMarkerFromLayer(layer: any, featureID: string) {
@@ -172,7 +179,9 @@ export class BlogComponent implements OnInit {
 
     onMapResize(event): void {
         console.log("window resize");
-        this.map.invalidateSize();
+        if (this.map) {
+            this.map.invalidateSize();
+        }
     }
 
 }
