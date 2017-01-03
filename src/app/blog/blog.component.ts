@@ -125,7 +125,7 @@ export class BlogComponent implements OnInit {
             this.layerService.getOverview().then(layer => {
                 this.overviewLayer = layer;
                 this.overviewLayer.addTo(this.map);
-                // this.flyToLayer(this.overviewLayer);
+                this.fitToLayer(this.overviewLayer);
             });
         }
     }
@@ -161,24 +161,23 @@ export class BlogComponent implements OnInit {
 
     fitToLayer(layer): void {
         this.map.fitBounds(layer.getBounds(), {
-            // padding: [40, 40]
+            padding: [60, 60]
         });
     }
 
     flyToLayer(layer): void {
         this.map.flyToBounds(layer.getBounds(), {
-            padding: [40, 40]
+            padding: [60, 60]
         }, {
             duration: 4
         });
     }
 
     flyToMarker(marker): void {
-        this.map.flyTo(marker.getLatLng());
+        this.map.flyTo(marker.getLatLng(), 11);
     }
 
     onMapResize(event): void {
-        console.log("window resize");
         if (this.map) {
             this.map.invalidateSize();
         }

@@ -1,3 +1,4 @@
+5
 "use strict";
 
 var express = require("express");
@@ -6,8 +7,43 @@ var Post = require("../models/post");
 var GeoJson = require("../models/feature");
 var User = require("../models/user");
 var _ = require("lodash-node");
+var jwt = require("jsonwebtoken");
+var config = require("../config");
 
-router.get("/features", function (req, res) {
+// authorization middleware
+router.get("*", function(req, res, next) {
+
+    // check header or url parameters or post parameters for token
+    // var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    var token = req.headers["authorization"];
+
+    // decode token
+    if (token) {
+        // verifies secret and checks exp
+        jwt.verify(token.substr(7), config.secret, function(err, decoded) {
+            if (err) {
+                return res.status(403).send({
+                    success: false,
+                    message: "Failed to authenticate token."
+                });
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                next();
+            }
+        });
+
+    } else {
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: "No token provided."
+        });
+    }
+});
+
+router.get("/features", function(req, res) {
     GeoJson.find({}, function(err, features) {
         if (err) {
             throw err;
