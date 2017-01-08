@@ -4,7 +4,7 @@ import {
     ElementRef,
     Renderer
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import * as L from "leaflet";
 
 import { Post } from "../shared/post";
@@ -28,11 +28,13 @@ export class BlogComponent implements OnInit {
     user: any;
     mapHeight: string = "768px";
     loading: boolean;
+    postID: any;
 
     constructor(
         private authService: AuthService,
         private postService: PostService,
         private layerService: LayerService,
+        private route: ActivatedRoute,
         private router: Router,
         private elementRef: ElementRef,
         private renderer: Renderer
@@ -48,10 +50,7 @@ export class BlogComponent implements OnInit {
                 return o.published || !o.published && this.user.role === "admin";
             });
             this.loading = false;
-        })
-        .catch(() => this.router.navigateByUrl("/login"));
-
-        this.authService.verify().catch(() => this.router.navigateByUrl("/login"));
+        }).catch(() => this.loading = false);
 
         if (!this.map) {
             setTimeout(() => {
@@ -98,7 +97,7 @@ export class BlogComponent implements OnInit {
         this.addOverviewLayer();
     }
 
-    initMap() {
+    initMap(): void {
         this.map = L.map("map", {
             center: [50.004716, 8.263407],
             zoom: 2,
@@ -111,7 +110,7 @@ export class BlogComponent implements OnInit {
         // add basemap
         this.layerService.basemaps.light.addTo(this.map);
 
-        // add overview features
+        // load overview or post layer based on requested url
         this.addOverviewLayer();
 
     }

@@ -3,11 +3,13 @@ import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 
 import { ConfigService } from "./config.service";
+import { User } from "../user";
 
 @Injectable()
 export class AuthService {
 
     allowed: Observable<boolean>;
+    redirectUrl: any;
 
     // private user: User;
     constructor(
@@ -15,7 +17,7 @@ export class AuthService {
         private http: Http
     ) { }
 
-    getUser(): string {
+    getUser(): User {
         return JSON.parse(localStorage.getItem("user"));
     }
 
@@ -24,47 +26,20 @@ export class AuthService {
         return user.token;
     }
 
-    isLoggedIn() {
-        return !!localStorage.getItem("user");
-        // return new Promise((resolve, reject) => {
-        //     // check if token exists
-        //     if (!localStorage.getItem("token")) {
-        //         reject(false);
-        //     }
-        //
-        //     // check if token is valid
-        //     let headers = new Headers({ "Content-Type": "application/json" });
-        //     let options = new RequestOptions({ headers: headers });
-        //     let authToken = localStorage.getItem("token");
-        //     headers.append("Authorization", `Bearer ${ authToken }`);
-        //
-        //     return this.http.post(this.configService.HOST + "/auth/verify", {}, options)
-        //         .toPromise()
-        //         .then(res => {
-        //             let data = res.json();
-        //             if (data.success) {
-        //                 resolve(data);
-        //             } else {
-        //                 reject(data);
-        //             }
-        //         })
-        //         .catch((res: any) => resolve(res.json() || "Server error"));
-        // });
-
-    }
-
-    verify(): Promise<any> {
+    isLoggedIn(): Promise<any> {
         return new Promise((resolve, reject) => {
 
             // console.log(this.getToken());
             if (!this.getToken()) {
-                reject();
+                console.log("no token");
+                reject(false);
             }
 
             // check if token is valid
             let headers = new Headers({ "Content-Type": "application/json" });
             let options = new RequestOptions({ headers: headers });
             let authToken = this.getToken();
+
             headers.append("Authorization", `Bearer ${ authToken }`);
 
             return this.http.post(this.configService.HOST + "/auth/verify", {}, options)

@@ -26,17 +26,15 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        if (!this.authService.isLoggedIn() || !this.hasAccess()) {
-            this.router.navigateByUrl(`/`);
-        }
+        // if (!this.authService.isLoggedIn() || !this.hasAccess()) {
+        //     this.router.navigateByUrl(`/`);
+        // }
 
         this.postService.query()
-        .then(posts => this.posts = posts)
-        .catch(() => this.router.navigateByUrl("/login"));
+        .then(posts => this.posts = posts);
 
         this.userService.query()
-        .then(users => this.users = users)
-        .catch(() => this.router.navigateByUrl("/login"));
+        .then(users => this.users = users);
     }
 
     openNewPost(): void {

@@ -38,9 +38,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(express.static(path.join(__dirname, "../", "dist")));
-app.use(express.static(__dirname + "/public"));  // serve pictures
-
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
@@ -63,6 +60,16 @@ mongoose.connect(db, function(err) {
 // routes
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
+
+// make angular's path locationstrategy work
+function redirectRouterLessonUnmatched(req,res) {
+    res.sendFile("index.html", { root: './index.html' });
+}
+
+app.use(redirectRouterLessonUnmatched);
+
+app.use(express.static(path.join(__dirname, "../", "dist")));
+app.use(express.static(__dirname + "/public"));  // serve pictures
 
 app.listen(port, function () {
     console.log("Server listening on port " + port + "!");

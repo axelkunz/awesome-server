@@ -13,19 +13,24 @@ export class LoginComponent implements OnInit {
 
     username: string;
     password: string;
-    isLocked: boolean = false;
+    isLocked: boolean;
     errorMsg: string;
 
     constructor(
         private authService: AuthService,
         private userService: UserService,
         private router: Router
-    ) { }
+    ) {
+        this.isLocked = false;
+    }
 
     ngOnInit() {
-        this.authService.verify()
-        .then(() => this.router.navigateByUrl("/"))
-        .catch(() => console.log("not valid :/"));
+        this.isLocked = true;
+        this.authService.isLoggedIn()
+        .then(() => {
+            this.router.navigateByUrl("/");
+        })
+        .catch(() => this.isLocked = false);
     }
 
     onClick() {

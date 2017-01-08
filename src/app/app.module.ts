@@ -72,43 +72,44 @@ enableProdMode();
                 component: BlogComponent,
                 canActivate: [GuardService]
             },
+            {
+                path: "posts/:id",
+                component: PostComponent,
+                canActivate: [GuardService]
+            },
+
             // { path: "**", redirectTo: "", pathMatch: "full" },
 
             // admin routes
             {
-                path: "admin/dashboard",
-                component: DashboardComponent,
-                canActivate: [GuardService]
-            },
-            {
-                path: "admin/new-user",
-                component: NewUserComponent,
-                canActivate: [GuardService]
-            },
-            {
-                path: "admin/new-post",
-                component: NewPostComponent,
-                canActivate: [GuardService]
-            },
-            {
-                path: "admin/posts/:id",
-                component: EditPostComponent,
-                canActivate: [GuardService]
-            },
-            {
-                path: "admin/posts/:id/new-feature",
-                component: NewFeatureComponent,
-                canActivate: [GuardService]
-            },
-            {
-                path: "admin/draw-map",
-                component: DrawMapComponent,
-                canActivate: [GuardService]
-            },
-            {
-                path: "admin/users/:id",
-                component: UserDetailsComponent,
-                canActivate: [GuardService]
+                path: "admin",
+                canActivate: [GuardService],
+                children: [
+                    {
+                        path: "dashboard",
+                        component: DashboardComponent
+                    },
+                    {
+                        path: "new-user",
+                        component: NewUserComponent
+                    },
+                    {
+                        path: "new-post",
+                        component: NewPostComponent
+                    },
+                    {
+                        path: "posts/:id",
+                        component: EditPostComponent
+                    },
+                    {
+                        path: "posts/:id/new-feature",
+                        component: NewFeatureComponent
+                    },
+                    {
+                        path: "users/:id",
+                        component: UserDetailsComponent
+                    }
+                ]
             }
         ])
     ],
@@ -121,8 +122,7 @@ enableProdMode();
         PostService,
         FeatureService,
         GuardService,
-        ImageService,
-        {provide: LocationStrategy, useClass: HashLocationStrategy}
+        ImageService
     ],
     bootstrap: [AppComponent]
 })
