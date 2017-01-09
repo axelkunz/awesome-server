@@ -5,9 +5,22 @@
 
   <h3>
     {{ post.title }}
+    
+    <span class="like-button" (click)="like()">
+      <i class="fa" [class.fa-heart]="hasLiked" [class.fa-heart-o]="!hasLiked" [style.color]="getColor()" aria-hidden="true"></i>
+    </span>
+    
   </h3>
 
   <p [innerHtml]="unsafeHtml"></p>
+
+  <div id="likes" *ngIf="post.likes.length > 0">
+    <span *ngFor="let username of post.likes; let i = index">
+      <span class="user">{{ username }}</span>
+      <span class="like-text">{{ getSeparator(i) }}</span>
+    </span>
+    <span class="like-text">gefällt das.</span>
+  </div>
 
   <app-comments [comments]="post.comments" (onNewComment)="addComment($event)" (onCommentDelete)="deleteComment($event)"></app-comments>
 </div>

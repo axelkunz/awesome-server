@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700");
 
-* {
-}
-
 h3 {
   font-family: "Roboto", sans-serif;;
   font-weight: bold;
@@ -30,6 +27,26 @@ p {
   font-family: "Roboto", sans-serif;
   color: gray;
   margin-top: 40px;
+}
+
+.like-button {
+  padding-left: 15px;
+  opacity: 0.9;
+  font-size: 26px;
+  vertical-align: middle;
+}
+
+.like-text {
+  font-size: 12px;
+}
+
+.user {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#likes {
+  margin-bottom: 23px;
 }
 
 /* style post"s inner html */

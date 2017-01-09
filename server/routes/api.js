@@ -119,6 +119,7 @@ router.put("/posts/:id", function (req, res) {
          subtitle: post.subtitle,
          text: post.text,
          comments: post.comments,
+         likes: post.likes,
          published: post.published,
          publishedAt: post.publishedAt
     };

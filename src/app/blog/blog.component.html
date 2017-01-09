@@ -5,33 +5,24 @@
       <div id="map"></div>
     </div>
 
-  
-     <a routerLink="/overview">Dashboard</a>
-     <a routerLink="/post/123">Heroes</a>
-  
-   
-
-
     <div id="side-panel" class="col-md-5 pull-right">
 
       <div *ngIf="loading" class="vcenter">
         <div class="loader"></div>
       </div>
 
-      <router-outlet></router-outlet>
-
       <div *ngIf="!selectedPost">
         <app-panel *ngFor="let post of posts | orderBy: ['publishedAt']: 'desc'" [post]="post" (panelClick)="showPost($event)"></app-panel>
       </div>
 
-      <!--<div *ngIf="selectedPost">
+      <div *ngIf="selectedPost">
         <button class="btn btn-link" (click)="showOverview()">
           <i class="fa fa-caret-left" aria-hidden="true"></i>
           Übersicht
         </button>
         <app-post [post]="selectedPost"></app-post>
       </div>
-    </div>-->
+    </div>
 
   </div>
 </div>
