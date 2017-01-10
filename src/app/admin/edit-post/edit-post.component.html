@@ -22,12 +22,84 @@
 
         <div class="form-group">
           <label>Text</label>
-          <textarea class="form-control" placeholder="Text" rows="15" name="text" [(ngModel)]="post.text" (ngModelChange)="onPostChange($event)"></textarea>
+          <textarea #myTextArea class="form-control" placeholder="Text" rows="15" name="text" [(ngModel)]="post.text" (ngModelChange)="onPostChange($event)"></textarea>
         </div>
 
-        <button type="button" class="btn btn-default btn-xs" (click)="onBreakClick()">Add Break</button>
-        <button type="button" class="btn btn-default btn-xs" (click)="onPictureClick()">Add Picture</button>
-        <button type="button" class="btn btn-default btn-xs" (click)="onLocationClick()">Add Location</button>
+        <button type="button" class="btn btn-default btn-sm" (click)="addBreak(myTextArea)">Add Break</button>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Add Picture</button>
+
+        <!-- Add Pictures Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Picture</h4>
+              </div>
+              <div class="modal-body">
+                <ul class="media-list">
+
+                  <li class="media" *ngFor="let picture of pictures" (click)="addPicture(myTextArea, picture)" data-dismiss="modal">
+                    <div class="media-left">
+                      <img class="media-object" src="{{ picturesPath + '/' + picture }}" alt="">
+                    </div>
+                    <div class="media-body">
+                      <h4 class="media-heading">
+                        {{ picture }} 
+                        <span *ngIf="isUsed(picture)">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>  
+                      </h4>
+                      <!-- optional text -->
+                    </div>
+                  </li>
+                </ul>
+
+              </div>
+              <!--<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>-->
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal2">
+          Add Location
+        </button>
+
+        <!-- Add Location Modal -->
+        <div id="myModal2" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Location</h4>
+              </div>
+              <div class="modal-body">
+                <p *ngFor="let feature of features; let i = index" (click)="addLocation(myTextArea, feature)" data-dismiss="modal">
+                  <i class="fa location-icon" [class.fa-bed]="feature.properties.category === 'accomodation'" [class.fa-cutlery]="feature.properties.category === 'food'" [class.fa-globe]="feature.properties.category === 'post'" [class.fa-university]="feature.properties.category === 'attraction'"
+                aria-hidden="true"></i>
+                  <span>{{ feature.properties.name }}</span>
+                  <span *ngIf="isUsed(feature._id)">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>  
+                </p>
+
+                <a [routerLink]="['/admin/posts/' + post._id + '/new-feature']" data-dismiss="modal">Add Feature</a>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
 
         <div class="checkbox">
           <label>
@@ -42,36 +114,10 @@
           <i *ngIf="isSaved" class="fa fa-check" aria-hidden="true"></i>
         </button>
 
-        <!-- show features -->
-        <table class="table table-hover" *ngIf="features">
-          <caption>Features</caption>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Category</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let feature of features; let i = index">
-
-              <!-- id -->
-              <td>{{ feature._id }}</td>
-
-              <!-- category -->
-              <td>
-                <i class="fa" [class.fa-bed]="feature.properties.category === 'accomodation'" [class.fa-cutlery]="feature.properties.category === 'food'" [class.fa-globe]="feature.properties.category === 'post'" [class.fa-university]="feature.properties.category === 'attraction'"
-                 aria-hidden="true"></i>
-              </td>
-
-              <td>{{ feature.properties.name }}</td>
-              <td><button class="btn btn-link" (click)="deleteFeature(feature._id)">delete</button></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <a [routerLink]="['/admin/posts/' + post._id + '/new-feature']">New Feature</a>
-
+        <p>
+          <a [routerLink]="['/admin/dashboard']">Go back</a>
+        </p>
+      
       </form>
     </div>
   </div>

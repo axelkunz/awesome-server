@@ -23,6 +23,7 @@ import { AuthService } from "./shared/auth.service";
 import { FeatureService } from "./shared/feature.service";
 import { ImageService } from "./image.service";
 import { GuardService } from "./shared/guard.service";
+import { PictureService } from "./shared/picture.service";
 
 import { CommentDatePipe } from "./blog/post/comments/comment-date.pipe";
 import { LoginComponent } from "./login/login.component";
@@ -122,7 +123,9 @@ enableProdMode();
         PostService,
         FeatureService,
         GuardService,
-        ImageService
+        ImageService,
+        PictureService,
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     bootstrap: [AppComponent]
 })

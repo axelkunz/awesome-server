@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 export class ConfigService {
 
   HOST: string = "http://localhost:3000";  // http://localhost:3000
+  PICTURE_PATH: string = this.HOST + "/images";
 
   ROLES: string[] = [
     "admin",

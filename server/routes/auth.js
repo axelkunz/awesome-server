@@ -52,11 +52,10 @@ module.exports = function(passport) {
 	});
 
     router.post("/verify", function(req, res) {
-        console.log("verify!");
         // check header or url parameters or post parameters for token
         // var token = req.body.token || req.query.token || req.headers['x-access-token'];
         var token = req.headers["authorization"];
-        console.log(token);
+
         // decode token
         if (token) {
             // verifies secret and checks exp

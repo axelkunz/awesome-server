@@ -48,6 +48,8 @@ export class AuthService {
                     let data = res.json();
                     if (data.success) {
                         resolve(data);
+                    } else {
+                        reject(data);
                     }
                 })
                 .catch((res: any) => reject(res.json() || "Server error"));

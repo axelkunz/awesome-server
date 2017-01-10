@@ -1,6 +1,6 @@
-5
 "use strict";
 
+var fs = require("fs");
 var express = require("express");
 var router = express.Router();
 var Post = require("../models/post");
@@ -16,7 +16,6 @@ router.get("*", function(req, res, next) {
     // check header or url parameters or post parameters for token
     // var token = req.body.token || req.query.token || req.headers['x-access-token'];
     var token = req.headers["authorization"];
-
     // decode token
     if (token) {
         // verifies secret and checks exp
@@ -192,6 +191,21 @@ router.delete("/users/:id", function (req, res) {
             throw err;
         }
         res.json(user);
+    });
+});
+
+/**
+ * @param {string} foldername
+ */
+router.get("/pictures/:dirname", function (req, res) {
+    var dirname = req.params.dirname;
+    fs.readdir(__dirname + "/../public/images/" + dirname, function(err, files) {
+        if (err) {
+            return res.status(404).send({
+                message: err
+            });
+        }
+        res.json(files);
     });
 });
 

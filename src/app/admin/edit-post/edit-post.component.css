@@ -1,0 +1,9 @@
+.media-object {
+    max-width: 64px;
+    max-height: 100px;
+}
+
+.location-icon {
+    width: 15px;
+    margin-right: 5px;
+}
