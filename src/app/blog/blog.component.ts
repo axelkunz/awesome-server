@@ -8,9 +8,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 import * as L from "leaflet";
 
 import { Post } from "../shared/post";
+import { User } from "../user";
 import { PostService } from "../shared/post.service";
 import { LayerService } from "./layer.service";
 import { AuthService } from "../shared/auth.service";
+import { UserService } from "../user.service";
 
 @Component({
     selector: "app-blog",
@@ -34,6 +36,7 @@ export class BlogComponent implements OnInit {
         private authService: AuthService,
         private postService: PostService,
         private layerService: LayerService,
+        private userService: UserService,
         private route: ActivatedRoute,
         private router: Router,
         private elementRef: ElementRef,
@@ -85,6 +88,28 @@ export class BlogComponent implements OnInit {
 
         // load post features on map
         this.addPostLayer(this.selectedPost._id);
+
+        // update this post's view counter
+        post.viewCount++;
+        this.postService.update(post);
+
+        // mark post as read
+        this.markPostAsRead(this.user.username, this.selectedPost);
+    }
+
+    markPostAsRead(username: string, post: Post): void {
+        this.userService.query().then(users => {
+            let userObj = users.find(x => x.username === username);
+            if (!userObj) {
+                console.log("user not found or multiple entries found!");
+                return;
+            }
+            let finds = userObj.readPosts.find(x => x === post._id);
+            if (!finds) {
+                userObj.readPosts.push(post._id);
+                this.userService.update(userObj);
+            }
+        });
     }
 
     showOverview() {

@@ -4,6 +4,7 @@ export class User {
     //password: string;
     role: string;
     token: string;
+    readPosts: Array<string>;
     // likes: number;
     // comments: number;
 }

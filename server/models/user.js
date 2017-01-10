@@ -6,9 +6,10 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     username: { type : String , unique : true, required : true },
     password: { type : String , required : true },
-    role: { type: String, default: "friend" }  // friend, family, admin
+    role: { type: String, default: "friend" },  // friend, family, admin
     //likes: { type: Number, default: 0 },
     //comments: { type: Number, default: 0 }
+    readPosts: { type: Array, default: [] }
 },{
     timestamps: true  // creates updated_at and created_at
 });

@@ -34,6 +34,7 @@ import { ValidPostPipe } from "./valid-post.pipe";
 import { DrawMapComponent } from "./draw-map/draw-map.component";
 import { UserDetailsComponent } from "./admin/user-details/user-details.component";
 import { PanelComponent } from "./blog/panel/panel.component";
+import { LimitToPipe } from './shared/limit-to.pipe';
 
 enableProdMode();
 
@@ -55,7 +56,8 @@ enableProdMode();
         ValidPostPipe,
         DrawMapComponent,
         UserDetailsComponent,
-        PanelComponent
+        PanelComponent,
+        LimitToPipe
     ],
     imports: [
         BrowserModule,

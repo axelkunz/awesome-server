@@ -4,16 +4,19 @@
       <h3>Dashboard</h3>
 
       <ul class="nav nav-tabs">
-        <li role="presentation" [class.active]="!showUsers" (click)="showUsers = false">
+        <li role="presentation" [class.active]="activeTab === 'posts'" (click)="activeTab = 'posts'">
           <a href="#">Posts</a>
         </li>
-        <li role="presentation" [class.active]="showUsers" (click)="showUsers = true">
+        <li role="presentation" [class.active]="activeTab === 'users'" (click)="activeTab = 'users'">
           <a href="#">Users</a>
+        </li>
+        <li role="presentation" [class.active]="activeTab === 'stats'" (click)="activeTab = 'stats'">
+          <a href="#">Stats</a>
         </li>
       </ul>
 
       <!-- show posts -->
-      <div id="posts" *ngIf="!showUsers">
+      <div id="posts" *ngIf="activeTab === 'posts'">
         <table class="table table-hover" *ngIf="posts">
           <thead>
             <tr>
@@ -23,6 +26,7 @@
               </th>
               <th>Title</th>
               <th>Status</th>
+              <th>Views</th>
             </tr>
           </thead>
           <tbody>
@@ -33,6 +37,7 @@
                 <span class="label label-default" *ngIf="!post.published">Draft</span>
                 <span class="label label-success" *ngIf="post.published">Published</span>
               </td>
+              <td>{{ post.viewCount }}</td>
             </tr>
           </tbody>
         </table>
@@ -40,7 +45,7 @@
         <button class="btn btn-default" (click)="openNewPost()">Create new post</button>
       </div>
 
-      <div id="users" *ngIf="showUsers">
+      <div id="users" *ngIf="activeTab === 'users'">
         <!-- show users -->
         <table class="table table-hover">
           <thead>
@@ -48,6 +53,7 @@
               <th>#</th>
               <th>Username</th>
               <th>Role</th>
+              <th>Read</th>
             </tr>
           </thead>
           <tbody>
@@ -59,12 +65,53 @@
                   {{ user.role }}
                 </span>
               </td>
+              <td>{{ user.readPosts.length }}</td>
             </tr>
           </tbody>
         </table>
 
         <!-- create new user -->
         <button class="btn btn-default" (click)="openNewUser()">Create new user</button>
+      </div>
+
+      <div id="stats" *ngIf="activeTab === 'stats'">
+
+        <table class="table table-hover">
+          <caption>Top Posts</caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of posts | orderBy: ['viewCount']:'desc' | limitTo: 5; let i = index" class="story">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ post.title }}</td>
+              <td>{{ post.viewCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-hover">
+          <caption>Top Users</caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users | orderBy: ['readPosts.length']:'desc' | limitTo: 5; let i = index" class="story">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ user.username }}</td>
+              <td>{{ user.readPosts.length }}</td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
 
     </div><!-- col-md-12 -->

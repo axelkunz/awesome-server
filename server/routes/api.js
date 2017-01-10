@@ -120,7 +120,8 @@ router.put("/posts/:id", function (req, res) {
          comments: post.comments,
          likes: post.likes,
          published: post.published,
-         publishedAt: post.publishedAt
+         publishedAt: post.publishedAt,
+         viewCount: post.viewCount
     };
     Post.findOneAndUpdate({_id: id}, update, function(err, post) {
         if (err) {
@@ -141,7 +142,7 @@ router.delete("/posts/:id", function (req, res) {
 });
 
 router.get("/users", function (req, res) {
-    User.find({}, "username role", function(err, users) {
+    User.find({}, "username role readPosts", function(err, users) {
         if (err) {
             throw err;
         }
@@ -151,7 +152,7 @@ router.get("/users", function (req, res) {
 
 router.get("/users/:id", function (req, res) {
     var id = req.params.id;
-    User.findOne({ _id: id }, "username role", function(err, user) {
+    User.findOne({ _id: id }, "username role readPosts", function(err, user) {
         if (err) {
             throw err;
         }
@@ -174,7 +175,8 @@ router.put("/users/:id", function (req, res) {
     var user = req.body;
     var update = {
         username: user.username,
-        role: user.role
+        role: user.role,
+        readPosts: user.readPosts
     };
     User.findOneAndUpdate({_id: id}, update, function(err, user) {
         if (err) {

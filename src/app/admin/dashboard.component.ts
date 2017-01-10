@@ -17,13 +17,16 @@ export class DashboardComponent implements OnInit {
     posts: Post[];
     users: User[];
     user: any;
+    activeTab: string;
 
     constructor(
         private userService: UserService,
         private postService: PostService,
         private authService: AuthService,
         private router: Router
-    ) { }
+    ) {
+        this.activeTab = "posts";
+    }
 
     ngOnInit(): void {
         // if (!this.authService.isLoggedIn() || !this.hasAccess()) {
@@ -31,10 +34,10 @@ export class DashboardComponent implements OnInit {
         // }
 
         this.postService.query()
-        .then(posts => this.posts = posts);
+            .then(posts => this.posts = posts);
 
         this.userService.query()
-        .then(users => this.users = users);
+            .then(users => this.users = users);
     }
 
     openNewPost(): void {
