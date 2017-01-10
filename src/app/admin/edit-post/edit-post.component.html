@@ -41,8 +41,8 @@
                 <h4 class="modal-title">Add Picture</h4>
               </div>
               <div class="modal-body">
+                <p *ngIf="!pictures">No pictures uploaded.</p>
                 <ul class="media-list">
-
                   <li class="media" *ngFor="let picture of pictures" (click)="addPicture(myTextArea, picture)" data-dismiss="modal">
                     <div class="media-left">
                       <img class="media-object" src="{{ picturesPath + '/' + picture }}" alt="">
@@ -84,6 +84,7 @@
                 <h4 class="modal-title">Add Location</h4>
               </div>
               <div class="modal-body">
+                <p *ngIf="!features">No features created.</p>
                 <p *ngFor="let feature of features; let i = index" (click)="addLocation(myTextArea, feature)" data-dismiss="modal">
                   <i class="fa location-icon" [class.fa-bed]="feature.properties.category === 'accomodation'" [class.fa-cutlery]="feature.properties.category === 'food'" [class.fa-globe]="feature.properties.category === 'post'" [class.fa-university]="feature.properties.category === 'attraction'"
                 aria-hidden="true"></i>

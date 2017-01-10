@@ -50,10 +50,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
     }
 
     save(): void {
-        this.postService.update(this.post).then(res => {
-            this.isSaved = true;
-            // this.router.navigateByUrl("/admin/dashboard");
-        });
+        this.postService.update(this.post).then(res => this.isSaved = true);
     }
 
     isUsed(picture: string): boolean {
@@ -67,11 +64,13 @@ export class EditPostComponent implements OnInit, OnDestroy {
     addBreak(textarea): void {
         let snippet = "<br><br>";
         this.post.text = this.post.text.substring(0, textarea.selectionStart) + snippet + this.post.text.substring(textarea.selectionEnd);
+        this.isSaved = false;
     }
 
     addPicture(textarea, picture): void {
         let snippet = `<figure>\n<img src="${ this.picturesPath }/${ picture }.jpg" class="img-responsive img-rounded">\n</figure>`;
         this.post.text = this.post.text.substring(0, textarea.selectionStart) + snippet + this.post.text.substring(textarea.selectionEnd);
+        this.isSaved = false;
     }
 
     addLocation(textarea, feature): void {
@@ -83,6 +82,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
             snippet = `<span class="reference ${ feature._id }">${ feature.properties.name }</span>`;
         }
         this.post.text = this.post.text.substring(0, textarea.selectionStart) + snippet + this.post.text.substring(textarea.selectionEnd);
+        this.isSaved = false;
     }
 
     deleteFeature(id: string): void {
