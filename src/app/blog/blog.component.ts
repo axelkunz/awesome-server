@@ -31,6 +31,7 @@ export class BlogComponent implements OnInit {
     mapHeight: string = "768px";
     loading: boolean;
     postID: any;
+    limit: number;
 
     constructor(
         private authService: AuthService,
@@ -41,7 +42,9 @@ export class BlogComponent implements OnInit {
         private router: Router,
         private elementRef: ElementRef,
         private renderer: Renderer
-    ) { }
+    ) {
+        this.limit = 10;
+    }
 
     ngOnInit() {
         this.loading = true;
@@ -59,7 +62,6 @@ export class BlogComponent implements OnInit {
             setTimeout(() => {
                 this.initMap();  // init with timout to finish rendering dom
             }, 500);
-
         }
 
         // workaround for not being able to put (click) functions into innerHml
@@ -120,6 +122,14 @@ export class BlogComponent implements OnInit {
 
         // add overview features
         this.addOverviewLayer();
+    }
+
+    hasMore() {
+        return this.posts && this.posts.length > this.limit;
+    }
+
+    raiseLimit() {
+        this.limit = this.limit + 10;
     }
 
     initMap(): void {

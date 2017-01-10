@@ -12,6 +12,10 @@
   margin: 0;
 }
 
+.show-more {
+  margin-top: 10px;
+}
+
 #map-panel {
   padding: 0; /* reset bootstrap padding */
   border-right: 1px solid darkgray;
