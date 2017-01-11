@@ -8,6 +8,7 @@ var postSchema = new Schema({
     subtitle: String,
     text: String,
     published: { type: Boolean, default: false },
+    hasBackground: { type: Boolean, default: false },
     likes: Array,
     comments: Array,
     publishedAt: Date,

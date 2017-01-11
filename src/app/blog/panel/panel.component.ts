@@ -17,7 +17,9 @@ export class PanelComponent implements OnInit {
     ngOnInit() { }
 
     getBackgroundImage(postID: string): string {
-        return `url("images/${ postID }/background.jpg")`;
+        if (this.post.hasBackground) {
+            return `url("images/${ this.post._id }/background.jpg")`;
+        }
     }
 
     onClick() {

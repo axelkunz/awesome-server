@@ -120,6 +120,7 @@ router.put("/posts/:id", function (req, res) {
          comments: post.comments,
          likes: post.likes,
          published: post.published,
+         hasBackground: post.hasBackground,
          publishedAt: post.publishedAt,
          viewCount: post.viewCount
     };

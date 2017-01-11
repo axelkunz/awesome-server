@@ -4,6 +4,7 @@ export class Post {
     subtitle: string;
     text: string;
     published: boolean = false;
+    hasBackground: boolean = false;
     storyID: string;
     comments: any[];
     likes: string[];

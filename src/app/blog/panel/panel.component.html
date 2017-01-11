@@ -1,5 +1,5 @@
 <div>
-  <div class="post-panel" (click)="onClick()" [style.opacity]="getOpacity()" [style.background-image]="getBackgroundImage(post._id)">
+  <div class="post-panel" (click)="onClick()" [style.opacity]="getOpacity()" [class.hasBackground]="post.hasBackground" [style.background-image]="getBackgroundImage()">
     {{ post.title }}
     <!--<span class="label label-default new-label">New</span>-->
     <p class="subtitle">

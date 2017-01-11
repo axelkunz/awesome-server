@@ -19,7 +19,8 @@ export class EditPostComponent implements OnInit, OnDestroy {
     postID: string;
     features: Feature[];
     file: string;
-    isSaved: boolean = true;
+    isSaved: boolean;
+    saving: boolean;
     pictures: string[];
     picturesPath: string;
 
@@ -31,7 +32,10 @@ export class EditPostComponent implements OnInit, OnDestroy {
         private imageService: ImageService,
         private configService: ConfigService,
         private pictureService: PictureService
-    ) { }
+    ) {
+        this.isSaved = true;
+        this.saving = false;
+    }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
@@ -50,7 +54,11 @@ export class EditPostComponent implements OnInit, OnDestroy {
     }
 
     save(): void {
-        this.postService.update(this.post).then(res => this.isSaved = true);
+        this.saving = true;
+        this.postService.update(this.post).then(res => {
+            this.saving = false;
+            this.isSaved = true;
+        }).catch(() => this.saving = false);
     }
 
     isUsed(picture: string): boolean {

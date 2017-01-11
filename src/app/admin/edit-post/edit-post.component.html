@@ -104,6 +104,12 @@
 
           </div>
         </div>
+        
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="hasBackground" [(ngModel)]="post.hasBackground" (ngModelChange)="onPostChange($event)"> Background Image
+          </label>
+        </div>
 
         <div class="checkbox">
           <label>
@@ -113,8 +119,9 @@
 
         <!-- save button -->
         <button id="save-button" class="btn btn-default" [class.btn-default]="!isSaved" [class.btn-success]="isSaved" (click)="save()" [disabled]="isSaved">
-          <span *ngIf="!isSaved">Save</span>
-          <span *ngIf="isSaved">Saved</span>
+          <span *ngIf="!isSaved && !saving">Save</span>
+          <span *ngIf="saving">Saving...</span>
+          <span *ngIf="isSaved && !saving">Saved</span>
           <i *ngIf="isSaved" class="fa fa-check" aria-hidden="true"></i>
         </button>
 
