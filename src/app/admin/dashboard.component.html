@@ -20,10 +20,6 @@
         <table class="table table-hover" *ngIf="posts">
           <thead>
             <tr>
-              <th>
-                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                Published
-              </th>
               <th>Title</th>
               <th>Status</th>
               <th>Views</th>
@@ -31,7 +27,6 @@
           </thead>
           <tbody>
             <tr *ngFor="let post of posts | orderBy: ['publishedAt']: 'desc'; let i = index" (click)="editPost(post._id)">
-              <td>{{ post.publishedAt | date: "dd.MM.yyyy" }}</td>
               <td>{{ post.title }}</td>
               <td>
                 <span class="label label-default" *ngIf="!post.published">Draft</span>

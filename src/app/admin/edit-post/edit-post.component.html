@@ -112,15 +112,22 @@
         </div>
 
         <!-- save button -->
-        <button class="btn btn-default" [class.btn-default]="!isSaved" [class.btn-success]="isSaved" (click)="save()" [disabled]="isSaved">
+        <button id="save-button" class="btn btn-default" [class.btn-default]="!isSaved" [class.btn-success]="isSaved" (click)="save()" [disabled]="isSaved">
           <span *ngIf="!isSaved">Save</span>
           <span *ngIf="isSaved">Saved</span>
           <i *ngIf="isSaved" class="fa fa-check" aria-hidden="true"></i>
         </button>
 
-        <p>
-          <a [routerLink]="['/admin/dashboard']">Go back</a>
-        </p>
+        <ul class="list-unstyled">
+          <li>
+            <a [routerLink]="['/admin/dashboard']"><i class="fa fa-caret-left" aria-hidden="true"></i>
+          Übersicht</a>
+          </li>
+          <li>
+            <a [routerLink]="['/']"><i class="fa fa-desktop" aria-hidden="true"></i>
+          Preview</a>
+          </li>
+        </ul>
       
       </form>
     </div>

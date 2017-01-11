@@ -1,3 +1,6 @@
+.container {
+    margin-bottom: 15px;
+}
 
 .media-object {
     max-width: 64px;
@@ -7,4 +10,8 @@
 .location-icon {
     width: 15px;
     margin-right: 5px;
+}
+
+#save-button {
+    margin-bottom: 20px;
 }
