@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700");
 
 h3 {
-  font-family: "Roboto", sans-serif;;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 36px;
   margin-bottom: 30px;
 }
 
@@ -18,9 +18,9 @@ p {
 
 .post {
   padding-top: 10px;
-  padding-left: 25px;
+  padding-left: 20px;
   padding-bottom: 15px;
-  padding-right: 25px;
+  padding-right: 20px;
 }
 
 .post-date {

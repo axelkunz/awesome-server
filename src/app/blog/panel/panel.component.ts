@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { Post } from "../../shared/post";
+import { ConfigService } from "../../shared/config.service";
 
 @Component({
     selector: "app-panel",
@@ -11,13 +12,12 @@ export class PanelComponent implements OnInit {
     @Input() post: Post;
     @Output() panelClick = new EventEmitter<Post>();
 
-    constructor() { }
+    constructor(private configService: ConfigService) { }
 
     ngOnInit() { }
 
-    getImage(post): any {
-        // return "url('assets/" + post._id + ".jpg')";
-        // return "url(http://eskipaper.com/images/pretty-landscape-sunset-1.jpg)";
+    getBackgroundImage(postID: string): string {
+        return `url("images/${ postID }/background.jpg")`;
     }
 
     onClick() {

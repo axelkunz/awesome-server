@@ -1,7 +1,12 @@
 div.post-panel {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
-  /* text-shadow: black 0.1em 0.1em 0.2em; */
+  color: white;
+  text-shadow: 
+    -1px 0 rgba(0, 0, 0, 0.3),
+    0 1px rgba(0, 0, 0, 0.3),
+    1px 0 rgba(0, 0, 0, 0.3),
+    0 -1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   height: 100px;
   border-bottom: 1px solid lightgray;
@@ -12,14 +17,15 @@ div.post-panel {
   padding-left: 25px;
 
   /* background: top left / cover no-repeat; */
-  background-position: center center;
-  opacity: 0.9;
+  /*background-position: bottom left;*/
+  background: left / cover;
 }
 
 p.subtitle {
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
   font-weight: normal;
+  color:white;
 }
 
 span.date {

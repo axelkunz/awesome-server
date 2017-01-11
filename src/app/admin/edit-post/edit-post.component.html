@@ -42,6 +42,9 @@
               </div>
               <div class="modal-body">
                 <p *ngIf="!pictures">No pictures uploaded.</p>
+                
+                <!--<img *ngFor="let picture of pictures" src="{{ picturesPath + '/' + picture }}" alt="" class="img-thumbnail">-->
+
                 <ul class="media-list">
                   <li class="media" *ngFor="let picture of pictures" (click)="addPicture(myTextArea, picture)" data-dismiss="modal">
                     <div class="media-left">
