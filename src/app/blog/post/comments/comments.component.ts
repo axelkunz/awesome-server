@@ -70,7 +70,7 @@ export class CommentsComponent implements OnInit {
         if (minutes.length === 1) {
             minutes = "0" + minutes;
         }
-        return `${ d.getDate() }. ${ month[d.getMonth()] } ${ d.getFullYear() } ${ hours }:${ minutes } Uhr`;
+        return `${ d.getDate() }. ${ month[d.getMonth()] } ${ d.getFullYear() }, ${ hours }:${ minutes }`;
     }
 
 }
