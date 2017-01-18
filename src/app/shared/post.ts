@@ -9,5 +9,5 @@ export class Post {
     comments: any[];
     likes: string[];
     publishedAt: Date;
-    viewCount: Number;
+    viewCount: number;
 }
