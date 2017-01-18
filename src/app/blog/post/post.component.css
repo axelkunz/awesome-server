@@ -49,6 +49,11 @@ p {
   margin-bottom: 23px;
 }
 
+:host >>> a.image-link {
+  text-decoration: none;
+  color: initial;
+}
+
 /* style post"s inner html */
 :host >>> span.reference {
   cursor: pointer;
@@ -81,8 +86,15 @@ p {
 @media (max-width: 991px) {
   :host >>> span.reference {
     cursor: default;
-    color: black;
+    color: initial;
     padding-left: 0px;
-    background-image:none;
+    background-image: none;
   }
+
+  /* disable picture lightbox on smaller devices */ 
+  :host >>> figure {
+    cursor: default;
+    pointer-events: none;
+  }
+
 }

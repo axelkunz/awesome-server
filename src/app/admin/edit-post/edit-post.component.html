@@ -42,26 +42,7 @@
               </div>
               <div class="modal-body">
                 <p *ngIf="!pictures">No pictures uploaded.</p>
-                
-                <!--<img *ngFor="let picture of pictures" src="{{ picturesPath + '/' + picture }}" alt="" class="img-thumbnail">-->
-
-                <ul class="media-list">
-                  <li class="media" *ngFor="let picture of pictures" (click)="addPicture(myTextArea, picture)" data-dismiss="modal">
-                    <div class="media-left">
-                      <img class="media-object" src="{{ picturesPath + '/' + picture }}" alt="">
-                    </div>
-                    <div class="media-body">
-                      <h4 class="media-heading">
-                        {{ picture }} 
-                        <span *ngIf="isUsed(picture)">
-                          <i class="fa fa-check" aria-hidden="true"></i>
-                        </span>  
-                      </h4>
-                      <!-- optional text -->
-                    </div>
-                  </li>
-                </ul>
-
+                <img *ngFor="let picture of pictures" src="{{ picturesPath + '/' + picture }}" alt="" class="img-rounded" [class.used]="isUsed(picture)" (click)="addPicture(myTextArea, picture)" data-dismiss="modal">
               </div>
               <!--<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

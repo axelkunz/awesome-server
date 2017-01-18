@@ -76,7 +76,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
     }
 
     addPicture(textarea, picture): void {
-        let snippet = `<figure>\n<img src="${ this.picturesPath }/${ picture }" class="img-responsive img-rounded">\n</figure>`;
+        let snippet = `<figure>\n  <a href="${ this.picturesPath }/${ picture }" class="image-link" data-lightbox="image-1" data-title="">\n    <img src="${ this.picturesPath }/${ picture }" class="img-responsive img-rounded">\n  </a>\n</figure>`;
         this.post.text = this.post.text.substring(0, textarea.selectionStart) + snippet + this.post.text.substring(textarea.selectionEnd);
         this.isSaved = false;
     }
