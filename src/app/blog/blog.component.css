@@ -62,8 +62,8 @@ button.btn-link {
 }
 
 .loader {
-    border: 5px solid #f3f3f3; /* Light grey */
-    border-top: 5px solid rgba(41, 130, 203, 1); /* Blue */
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid rgba(41, 130, 203, 1);
     border-radius: 50%;
     width: 75px;
     height: 75px;

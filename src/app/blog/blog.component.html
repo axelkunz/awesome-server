@@ -15,10 +15,23 @@
         <app-panel *ngFor="let post of posts | orderBy: ['publishedAt']: 'desc' | limitTo: limit" [post]="post" (panelClick)="showPost($event)"></app-panel>
         <button class="btn btn-default center-block show-more" (click)="raiseLimit()" *ngIf="hasMore()">zeige ältere</button>
       </div>
-      
+
       <div *ngIf="selectedPost">
+        <nav class="navbar navbar-default navbar-fixed-top visible-xs">
+          <div class="container">
+
+            <p class="navbar-text">
+              <span (click)="showOverview()">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                Übersicht
+              </span>
+            </p>
+
+          </div>
+        </nav>
+
         <button class="btn btn-link" (click)="showOverview()">
-          <i class="fa fa-caret-left" aria-hidden="true"></i>
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
           Übersicht
         </button>
         <app-post [post]="selectedPost"></app-post>
