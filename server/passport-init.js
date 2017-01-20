@@ -48,7 +48,7 @@ module.exports = function(passport){
 			);
 		}
 	));
-    
+
     // method called when requesting route /auth/signup
 	passport.use("signup", new LocalStrategy({
 			passReqToCallback : true // allows us to pass back the entire request to the callback
@@ -73,7 +73,7 @@ module.exports = function(passport){
 					// set the user"s local credentials
 					newUser.username = username;
 					newUser.password = createHash(password);
-                    newUser.role = "friend";
+          newUser.role = "friend";
 
 					// save the user
 					newUser.save(function(err) {
