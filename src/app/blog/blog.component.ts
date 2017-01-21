@@ -110,8 +110,12 @@ export class BlogComponent implements OnInit {
         this.markPostAsRead(this.user.username, this.selectedPost);
     }
 
+    closeMap() {
+        $("#myModal").modal("hide");
+    }
+
     openMap(postID: string) {
-        $('#myModal').modal('show');
+        $("#myModal").modal("show");
 
         if (!this.map2) {
             setTimeout(() => {

@@ -28,8 +28,17 @@
 }
 
 #map2 {
-  height: calc(100vh - 25px - 30px - 4px);
+  height: calc(100vh - 2px);
   width: 100%;
+}
+
+#close-button {
+  padding: 12px;
+  font-size: 26px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1040;
 }
 
 #side-panel {
