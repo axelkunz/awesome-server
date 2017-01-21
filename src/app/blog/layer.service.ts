@@ -19,6 +19,11 @@ export class LayerService {
             // attribution: "&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors"
         }),
 
+        light2: L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/" + "tiles/256/{z}/{x}/{y}?access_token=" + this.KEY, {
+            noWrap: true
+            // attribution: "&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors"
+        }),
+
         oldLight: L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${ this.KEY }`),
 
         dark: L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v9/" + "tiles/256/{z}/{x}/{y}?access_token=" + this.KEY, {

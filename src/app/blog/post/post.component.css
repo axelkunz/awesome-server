@@ -91,7 +91,7 @@ p {
     background-image: none;
   }
 
-  /* disable picture lightbox on smaller devices */ 
+  /* disable picture lightbox on smaller devices */
   :host >>> figure {
     cursor: default;
     pointer-events: none;

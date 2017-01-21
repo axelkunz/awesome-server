@@ -25,10 +25,37 @@
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 Übersicht
               </span>
+              <span class="pull-right" (click)="openMap(selectedPost._id)">
+                <i class="fa fa-map" aria-hidden="true"></i>
+                <!-- Karte -->
+              </span>
             </p>
+
+            <!-- Trigger the modal with a button -->
+            <!-- <button type="button" class="btn btn-default btn-sm" (click)="openMap()" data-toggle="modal" data-target="#myModal">Map</button> -->
+
+
 
           </div>
         </nav>
+
+        <!-- Add Map Modal -->
+        <div id="myModal" class="modal fade" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Karte</h4>
+              </div>
+              <div class="modal-body">
+                <div id="map2"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
 
         <button class="btn btn-link" (click)="showOverview()">
           <i class="fa fa-chevron-left" aria-hidden="true"></i>

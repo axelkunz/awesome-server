@@ -13,6 +13,7 @@ import { PostService } from "../shared/post.service";
 import { LayerService } from "./layer.service";
 import { AuthService } from "../shared/auth.service";
 import { UserService } from "../user.service";
+declare var $: any;
 
 @Component({
     selector: "app-blog",
@@ -23,12 +24,13 @@ export class BlogComponent implements OnInit {
 
     posts: Post[];
     map: any;
+    map2: any;
     selectedPost: Post;
     overviewLayer: any;
     postLayer: any;
+    postLayer2: any;
     hoveredPostID: string;
     user: any;
-    mapHeight: string = "768px";
     loading: boolean;
     postID: any;
     limit: number;
@@ -75,10 +77,19 @@ export class BlogComponent implements OnInit {
     }
 
     onRefClick(featureID: string): void {
-        let marker = this.getMarkerFromLayer(this.postLayer, featureID);
-        if (marker) {
-            this.flyToMarker(marker);
-            marker.openPopup();
+        if (this.map2) {
+            $("#myModal").modal("show");
+            let marker = this.getMarkerFromLayer(this.postLayer2, featureID);
+            if (marker) {
+                this.map2.flyTo(marker.getLatLng());
+                setTimeout(() => marker.openPopup(), 500);
+            }
+        } else {
+            let marker = this.getMarkerFromLayer(this.postLayer, featureID);
+            if (marker) {
+                this.flyToMarker(marker);
+                marker.openPopup();
+            }
         }
     }
 
@@ -97,6 +108,45 @@ export class BlogComponent implements OnInit {
 
         // mark post as read
         this.markPostAsRead(this.user.username, this.selectedPost);
+    }
+
+    openMap(postID: string) {
+        $('#myModal').modal('show');
+
+        if (!this.map2) {
+            setTimeout(() => {
+                // load mobile map
+                this.map2 = L.map("map2", {
+                    center: [50.004716, 8.263407],
+                    zoom: 3,
+                    minZoom: 2
+                    // zoomControl: false
+                });
+
+                // force users to stay in bounds
+                // this.map2.setMaxBounds([[180, -180], [-180, 200]]);
+
+                // add basemap
+                this.layerService.basemaps.light2.addTo(this.map2);
+
+                this.layerService.getPostLayer(postID).then(layer => {
+                    this.postLayer2 = layer;
+                    this.postLayer2.addTo(this.map2);
+
+                    this.map2.flyToBounds(this.postLayer2.getBounds(), {
+                        padding: [60, 60]
+                    }, {
+                        duration: 4
+                    });
+                });
+            }, 500);
+        } else {
+            this.map2.flyToBounds(this.postLayer2.getBounds(), {
+                padding: [60, 60]
+            }, {
+                duration: 4
+            });
+        }
     }
 
     markPostAsRead(username: string, post: Post): void {

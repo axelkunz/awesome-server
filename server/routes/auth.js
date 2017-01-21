@@ -11,7 +11,7 @@ module.exports = function(passport) {
 	//sends successful login state back to angular
 	router.get("/success", function(req, res) {
     var token = jwt.sign(req.user, config.secret, {
-      expiresIn: "7d" // 1 week
+      expiresIn: "14d" // 1 week
     });
 
     res.json({
