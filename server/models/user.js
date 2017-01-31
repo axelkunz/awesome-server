@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    username: { type : String , unique : true, required : true },
-    password: { type : String , required : true },
+    username: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
     role: { type: String, default: "friend" },  // friend, family, admin
     //likes: { type: Number, default: 0 },
     //comments: { type: Number, default: 0 }

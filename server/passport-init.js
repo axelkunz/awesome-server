@@ -1,7 +1,6 @@
 "use strict";
 
 var mongoose = require("mongoose");
-//var User = mongoose.model("User");
 var User = require("./models/user");
 var LocalStrategy = require("passport-local").Strategy;
 var bCrypt = require("bcrypt-nodejs");
@@ -49,7 +48,7 @@ module.exports = function(passport){
 		}
 	));
 
-    // method called when requesting route /auth/signup
+  // method called when requesting route /auth/signup
 	passport.use("signup", new LocalStrategy({
 			passReqToCallback : true // allows us to pass back the entire request to the callback
 		},

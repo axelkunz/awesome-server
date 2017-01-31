@@ -1,19 +1,22 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core'
 
 @Injectable()
 export class ConfigService {
 
-  HOST: string = "http://localhost:3000";  // http://localhost:3000
-  PICTURE_PATH: string; // = public/images
+  HOST: string = 'http://localhost:3000'  // http://localhost:3000
+  PICTURE_PATH: string // = public/images
 
   ROLES: string[] = [
-    "admin",
-    "family",
-    "friend"
-  ];
+    'admin',
+    'family',
+    'friend'
+  ]
+
+  // width in pixels for which the navbar gets displayed
+  MOBILE_WIDTH = 480
 
   constructor() {
-    this.PICTURE_PATH = this.HOST ? this.HOST + "/images" : "images";
+    this.PICTURE_PATH = this.HOST ? this.HOST + '/images' : 'images'
   }
 
 }

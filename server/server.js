@@ -14,63 +14,46 @@ var apiRoutes = require("./routes/api");
 var authRoutes = require("./routes/auth")(passport);
 var jwt = require("jsonwebtoken");
 var mongoose = require("mongoose");
-
 var config = require("./config");
-
-// middleware
-app.use(cors());
-
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
 
 // auhentication
 var initPassport = require("./passport-init");
 initPassport(passport);
 
+// middleware
+app.use(cors());
 app.use(compression());  // compress static content using gzip
 app.use(logger("dev"));  // morgan
 app.use(session({
-    secret: "everything is awesome!",
+    secret: config.secret,
     resave: true,
     saveUninitialized: true
 }));
-
 app.use(bodyParser.json());
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 // connect to db
 var db = process.env.MONGO_URI || config.database;
 mongoose.connect(db, function(err) {
-    if (err) {
-        console.log("couldn't connect to mongodb!");
-        console.log(err);
-    } else {
-        console.log("connected to mongodb successfully!");
-    }
+  if (err) {
+    console.log("couldn't connect to mongodb!");
+    throw err;
+  } else {
+    console.log("connected to mongodb successfully!");
+  }
 });
 
-// security
-// app.disable("x-powered-by");
-
-// routes
+// api
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
 
-// make angular's path locationstrategy work
-// function redirectRouterLessonUnmatched(req,res) {
-//     res.sendFile("index.html", { root: './index.html' });
-// }
-
-//app.use(redirectRouterLessonUnmatched);
-
+// app
 app.use(express.static(path.join(__dirname, "../", "dist")));
-app.use(express.static(__dirname + "/public"));  // serve pictures
+
+// static content
+app.use(express.static(__dirname + "/public"));
 
 app.listen(port, function () {
-    console.log("Server listening on port " + port + "!");
+  console.log("Server listening on port " + port + "!");
 });

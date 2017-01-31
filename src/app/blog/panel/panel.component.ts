@@ -23,7 +23,7 @@ export class PanelComponent implements OnInit {
     }
 
     onClick() {
-        this.panelClick.emit(this.post);
+        this.panelClick.emit(this.post)
     }
 
     /**
