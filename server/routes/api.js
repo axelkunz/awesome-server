@@ -6,7 +6,7 @@ var router = express.Router();
 var Post = require("../models/post");
 var GeoJson = require("../models/feature");
 var User = require("../models/user");
-var _ = require("lodash-node");
+// var _ = require("lodash-node");
 var jwt = require("jsonwebtoken");
 var config = require("../config");
 

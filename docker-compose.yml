@@ -1,0 +1,24 @@
+# This file is building the image if not already present,
+# mounts the container workdir /app
+# and starts the container.
+# benefit: with one command it will initialize and run our containers
+# now anyone can clone the github repository and run docker-compose up to get a clean development environment
+# usage: docker-compose up
+# docker-compose up --build
+# link tag allows to link services between containers
+version: "2"
+services:
+  web:
+    build: .
+    volumes:
+      - /Users/axel/Projects/awesome:/usr/src/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    image: mongo
+    volumes:
+      - /Users/axel/mongodb-data:/data/db
+    ports:
+      - "27017:27017"
